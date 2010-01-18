@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://linkpad/skin/linkpad.css" type="text/css"?>
+
+<!DOCTYPE prefwindow [
+	<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+	<!ENTITY % linkpadDTD SYSTEM "chrome://linkpad/locale/linkpad.dtd">
+	%brandDTD;
+	%linkpadDTD;
+]>
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            id="linkpad_options"
+            windowtype="linkpad:options"
+            title="&linkpad.prefs.title;"
+            onload="LinkpadOptions.onLoad();"
+            type="prefwindow">
+
+	<prefpane id="linkpad_pane">
+
+		<preferences>
+			<preference id="privacy.item.linkpad"
+			            name="privacy.item.linkpad"
+			            type="bool" />
+			<preference id="extensions.netscape.linkpad.open"
+			            name="extensions.netscape.linkpad.open"
+			            type="int" />
+			<preference id="extensions.netscape.linkpad.openClickCount"
+			            name="extensions.netscape.linkpad.openClickCount"
+			            type="int" />                                        
+			<preference id="extensions.netscape.linkpad.removeLinkOnOpen"
+			            name="extensions.netscape.linkpad.removeLinkOnOpen"
+			            type="bool" />
+			<preference id="extensions.netscape.linkpad.showClear"
+			            name="extensions.netscape.linkpad.showClear"
+			            type="bool" />
+		</preferences>
+
+		<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-options.js"></script>
+
+		<stringbundleset id="mainStringbundleSet">
+			<stringbundle id="linkpad_bundle" src="chrome://linkpad/locale/linkpad.properties" />
+		</stringbundleset>
+
+		<groupbox id="linkpad_links">
+				<caption label="&linkpad.prefs.links.caption;" />
+				<grid>
+					<columns>
+					<column />
+					<column flex="1" />
+					</columns>
+					<rows>
+						<row align="center">
+							<label id="open_label"
+							       value="&linkpad.prefs.links.open.label;"
+							       accesskey="&linkpad.prefs.links.open.accesskey;"
+							       control="open_menulist" />
+							<menulist id="open_menulist" preference="extensions.netscape.linkpad.open">
+								<menupopup>
+									<menuitem label="&linkpad.prefs.links.open.current;" value="1" />
+									<menuitem label="&linkpad.prefs.links.open.window;" value="2" />
+									<menuitem label="&linkpad.prefs.links.open.tab;" value="3" />
+								</menupopup>
+							</menulist>
+						</row>
+						<row align="center"> 
+							<label id="click_label" value="&linkpad.prefs.links.click.label;" 
+							       accesskey="&linkpad.prefs.links.click.accesskey;"  
+							       control="click_menulist" />
+							<menulist id="click_menulist" 
+							          preference="extensions.netscape.linkpad.openClickCount">
+								<menupopup>
+									<menuitem label="&linkpad.prefs.links.click.single;" value="1" />
+									<menuitem label="&linkpad.prefs.links.click.double;" value="2" />
+								</menupopup>
+							</menulist>
+						</row>
+						<row align="center">
+							<spacer flex="1" />
+							<checkbox id="remove_checkbox"
+							          label="&linkpad.prefs.links.remove.label;"
+							          accesskey="&linkpad.prefs.links.remove.accesskey;"
+							          preference="extensions.netscape.linkpad.removeLinkOnOpen" />
+						</row>
+					</rows>
+				</grid>
+		</groupbox>
+
+		<groupbox id="linkpad_dialogs">
+			<caption label="&linkpad.prefs.dialogs.caption;" />
+			<checkbox id="clear_checkbox"
+			          label="&linkpad.prefs.dialogs.clear.label;" 
+			          accesskey="&linkpad.prefs.dialogs.clear.accesskey;"
+			          preference="extensions.netscape.linkpad.showClear" />
+		</groupbox>
+
+		<groupbox id="linkpad_database">
+			<caption id="database_caption" label="&linkpad.prefs.database.caption;" />
+				<hbox align="center"> 
+					<checkbox id="sanitize_checkbox" 
+					          label="&linkpad.prefs.database.sanitize.label;" 
+					          accesskey="&linkpad.prefs.database.sanitize.accesskey;"
+					          preference="privacy.item.linkpad" flex="1" /> 
+					<button id="compact_button" 
+					        label="&linkpad.prefs.database.compact.label;" 
+					        accesskey="&linkpad.prefs.database.compact.accesskey;"
+					        oncommand="LinkpadOptions.compactDB();" />
+				</hbox>
+		</groupbox>
+
+	</prefpane>
+</prefwindow>

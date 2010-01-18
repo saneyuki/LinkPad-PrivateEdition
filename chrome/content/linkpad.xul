@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://linkpad/skin/linkpad.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://linkpad/locale/linkpad.dtd">
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         id="linkpad_overlay"
+         windowtype="linkpad:overlay">
+
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js"></script>
+	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-utils.js"></script>
+	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad.js"></script>
+	<script type="application/x-javascript">
+		<![CDATA[
+			window.addEventListener("load", function () { Linkpad.onLoad(); }, false);
+			window.addEventListener("unload", function() { Linkpad.onUnload(); }, false);
+		]]>
+	</script>
+
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="linkpad_bundle" src="chrome://linkpad/locale/linkpad.properties"/>
+	</stringbundleset>
+
+	<keyset id="mainKeyset">
+		<key id="linkpad_key" key="&linkpad.overlay.commandkey;"
+		     command="linkpad_panel" modifiers="accel,shift"/>
+	</keyset>
+
+	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="linkpad_panel"
+		             label="&linkpad.overlay.label;"
+		             autoCheck="false"
+		             type="checkbox" group="sidebar"
+		             sidebartitle="&linkpad.overlay.title;"
+		             sidebarurl="chrome://linkpad/content/linkpad-panel.xul"
+		             oncommand="toggleSidebar('linkpad_panel');"/>
+	</broadcasterset>
+
+	<popup id="contentAreaContextMenu">
+		<menuitem id="linkpad_saveContextLink"
+		          label="&linkpad.overlay.context;"
+		          insertbefore="context-savelink"
+		          oncommand="Linkpad.saveContextLink();" />
+		<menuitem id="linkpad_saveThisPage"
+		          label="&linkpad.overlay.page;"
+		          insertbefore="context-sep-viewbgimage"
+		          oncommand="Linkpad.saveThisPage();"/>
+	</popup>
+
+	<menupopup id="viewSidebarMenu">
+		<menuitem id="linkpad_menu"
+		          key="linkpad_key"
+		          observes="linkpad_panel"
+		          accesskey="&linkpad.overlay.accesskey;"/>
+	</menupopup>
+
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="linkpad_button" 
+		               class="toolbarbutton-1 chromeclass-toolbar-additional"
+		               observes="linkpad_panel"
+		               tooltiptext="&linkpad.overlay.tooltip;"/>
+	</toolbarpalette>
+</overlay>

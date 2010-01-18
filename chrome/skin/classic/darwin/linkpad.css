@@ -1,0 +1,106 @@
+#linkpad_button {
+  list-style-image: url("chrome://linkpad/skin/linkpad-toolbar.png");
+  -moz-image-region: rect(0px 24px 24px 0px);
+}
+/*
+#linkpad_button:not([checked="true"]):hover {
+  -moz-image-region: rect(24px 24px 48px 0px);
+}
+
+#linkpad_button:not([checked="true"]):hover:active {
+  -moz-image-region: rect(48px 24px 72px 0px);
+}
+
+#linkpad_button[checked="true"] {
+  -moz-image-region: rect(48px 24px 72px 0px);
+}
+*/
+toolbar[iconsize="small"] #linkpad_button {
+  list-style-image: url("chrome://linkpad/skin/linkpad-toolbar-small.png");
+  -moz-image-region: rect(0px 16px 16px 0px);
+}
+/*
+toolbar[iconsize="small"] #linkpad_button:not([checked="true"]):hover {
+  -moz-image-region: rect(16px 16px 32px 0px);
+}
+
+toolbar[iconsize="small"] #linkpad_button:not([checked="true"]):hover:active {
+  -moz-image-region: rect(32px 16px 48px 0px);
+}
+
+toolbar[iconsize="small"] #linkpad_button[checked="true"] {
+  -moz-image-region: rect(32px 16px 48px 0px);
+}
+
+#linkpad_status {
+  list-style-image: url("chrome://linkpad/skin/linkpad-statusbar.png");
+  -moz-image-region: rect(0px 16px 16px 0px);
+  width: 20px;
+}
+
+#linkpad_status[dragover="true"] {
+  -moz-image-region: rect(16px 16px 32px 0px);
+}
+*/
+/** Sidebar Panel **/
+#linkpad_panel,
+#linkpad_listbox {
+  -moz-appearance: none;
+  background-color: transparent;
+}
+
+.linkpad-item {
+  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+  background-color: transparent;
+  -moz-appearance: none;
+  border: none;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  -moz-padding-start: 2px;
+  -moz-padding-end: 4px;
+}
+
+.linkpad-item[selected="true"] {
+  background-color: #6f81a9;
+  background-image: url("chrome://browser/skin/places/selected-gradient.png");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  border-top: 1px solid #979797;
+  border-bottom: 1px solid #8a8a8a;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+listbox:focus > .linkpad-item[selected="true"] {
+  background-image: url("chrome://browser/skin/places/selected-focused-gradient.png");
+  background-color: #8a8a8a;
+  border-top: 1px solid #91a0c0;
+  border-bottom: 1px solid #6f81a9;
+}
+
+.linkpad-item[disabled="true"] {
+  color: GrayText;
+}
+
+.linkpad-item > .listcell-iconic > .listcell-icon {
+  width: 16px;
+  height: 16px;
+}
+
+#linkpad_listbox[clickcount="1"] .linkpad-item {
+  cursor: pointer;
+}
+
+.linkpad-item[dragover="top"] {
+  border-top-color: #404040;
+}
+
+.linkpad-item[dragover="bottom"] {
+  border-bottom-color: #404040;
+}
+
+/*
+#linkpad_listbox listboxbody {
+  overflow-y: hidden;
+}
+*/

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://linkpad/locale/linkpad.dtd">
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         id="linkpad_multipletab"
+         windowtype="linkpad:multipletab">
+
+	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-multipletab.js"></script>
+	<script type="application/x-javascript">
+		<![CDATA[
+			window.addEventListener("load", function () { LinkpadMultipleTab.onLoad(); }, false);
+		]]>
+	</script>
+
+	<!-- Set Item to Tab-Context by using Multiple Tab Handler's API -->
+	<menupopup id="multipletab-tabcontext-menu-template">
+		<menuitem id="linkpad_saveThisTab-multipletab"
+		          label="&linkpad.overlay.tab;"
+		          oncommand="Linkpad.saveThisTab();"
+		          multipletab-insertafter="document.getElementById('context_bookmarkAllTabs')"/>
+		<menuseparator id="linkpad_separator-multipletab"
+		               multipletab-insertafter="document.getElementById('context_bookmarkAllTabs').nextSibling"/>
+	</menupopup>
+
+	<menupopup id="multipletab-selection-menu">
+		<menuitem id="linkpad_saveSelectedTabs-multipletab-selection"
+		          label="&linkpad.multipletab.tab.selected;"
+		          oncommand="LinkpadMultipleTab.saveSelectedTabs();"/>
+	</menupopup>
+
+</overlay>

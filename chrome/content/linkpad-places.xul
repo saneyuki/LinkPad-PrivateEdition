@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://linkpad/locale/linkpad.dtd">
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+         id="linkpad_places"
+         windowtype="linkpad:places">
+
+	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-places.js"></script>
+	<script type="application/x-javascript">
+		<![CDATA[
+			window.addEventListener("load", function () { LinkpadPlaces.onLoad(); }, false);
+		]]>
+	</script>
+
+	<popup id="placesContext">
+		<menuitem id="linkpad_saveContext-places"
+		          label="&linkpad.overlay.context;"
+		          selection="link"
+		          selectiontype="single"
+		          forcehideselection="bookmark"
+		          oncommand="LinkpadPlaces.saveContext();" />
+	</popup>
+</overlay>

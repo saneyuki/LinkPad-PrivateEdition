@@ -1,0 +1,49 @@
+<!-- Global Entities -->
+<!ENTITY linkpad.shortName                         "Link Pad">
+
+<!-- Browser Overlay -->
+<!ENTITY linkpad.overlay.label                     "&linkpad.shortName;">
+<!ENTITY linkpad.overlay.title                     "&linkpad.shortName;">
+<!ENTITY linkpad.overlay.tooltip                   "Toggle &linkpad.shortName;">
+<!ENTITY linkpad.overlay.accesskey                 "L">
+<!ENTITY linkpad.overlay.commandkey                "L">
+<!ENTITY linkpad.overlay.drop                      "Drop a link to add it to the &linkpad.shortName;">
+<!ENTITY linkpad.overlay.context                   "Save This Link to &linkpad.shortName;">
+<!ENTITY linkpad.overlay.page                      "Save This Page to &linkpad.shortName;">
+<!ENTITY linkpad.overlay.tab                       "Save This Tab to &linkpad.shortName;">
+
+<!-- Multiple Tab Handler -->
+<!ENTITY linkpad.multipletab.tab.selected          "Save Selected Tabs to &linkpad.shortName;">
+
+<!-- Sidebar Panel -->
+<!ENTITY linkpad.panel.open.label                  "Open">
+<!ENTITY linkpad.panel.open.accesskey              "O">
+<!ENTITY linkpad.panel.openWin.label               "Open in New Window">
+<!ENTITY linkpad.panel.openWin.accesskey           "N">
+<!ENTITY linkpad.panel.openTab.label               "Open in New Tab">
+<!ENTITY linkpad.panel.openTab.accesskey           "w">
+<!ENTITY linkpad.panel.clear.label                 "Delete All">
+<!ENTITY linkpad.panel.clear.accesskey             "A">
+
+<!-- Preference Dialog -->
+<!ENTITY linkpad.prefs.title                       "&linkpad.shortName;">
+<!ENTITY linkpad.prefs.links.caption               "Links">
+<!ENTITY linkpad.prefs.links.open.label            "Open Links in:">
+<!ENTITY linkpad.prefs.links.open.accesskey        "e">
+<!ENTITY linkpad.prefs.links.open.current          "Current Tab">
+<!ENTITY linkpad.prefs.links.open.tab              "New Tab">
+<!ENTITY linkpad.prefs.links.open.window           "New Window">
+<!ENTITY linkpad.prefs.links.click.label           "Open with a:">
+<!ENTITY linkpad.prefs.links.click.accesskey       "p">
+<!ENTITY linkpad.prefs.links.click.single          "Single click">
+<!ENTITY linkpad.prefs.links.click.double          "Double click">
+<!ENTITY linkpad.prefs.links.remove.label          "Remove when opened">
+<!ENTITY linkpad.prefs.links.remove.accesskey      "R">
+<!ENTITY linkpad.prefs.dialogs.caption             "Warning Messages">
+<!ENTITY linkpad.prefs.dialogs.clear.label         "Show a warning when deleting all items">
+<!ENTITY linkpad.prefs.dialogs.clear.accesskey     "d">
+<!ENTITY linkpad.prefs.database.caption            "Database (???)">
+<!ENTITY linkpad.prefs.database.sanitize.label     "Clear &linkpad.shortName; when I close &brandShortName;">
+<!ENTITY linkpad.prefs.database.sanitize.accesskey "s">
+<!ENTITY linkpad.prefs.database.compact.label      "Compact">
+<!ENTITY linkpad.prefs.database.compact.accesskey  "C">
