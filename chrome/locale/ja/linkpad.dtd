@@ -28,7 +28,7 @@
 <!-- Preference Dialog -->
 <!ENTITY linkpad.prefs.title                       "&linkpad.shortName;">
 <!ENTITY linkpad.prefs.links.caption               "リンク">
-<!ENTITY linkpad.prefs.links.open.label            "Link Padのリンクを">
+<!ENTITY linkpad.prefs.links.open.label            "&linkpad.shortName;のリンクを">
 <!ENTITY linkpad.prefs.links.open.accesskey        "e">
 <!ENTITY linkpad.prefs.links.open.current          "タブに開く">
 <!ENTITY linkpad.prefs.links.open.tab              "新規タブで開く">
