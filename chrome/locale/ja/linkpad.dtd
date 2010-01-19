@@ -1,0 +1,49 @@
+<!-- Global Entities -->
+<!ENTITY linkpad.shortName                         "Link Pad">
+
+<!-- Browser Overlay -->
+<!ENTITY linkpad.overlay.label                     "&linkpad.shortName;">
+<!ENTITY linkpad.overlay.title                     "&linkpad.shortName;">
+<!ENTITY linkpad.overlay.tooltip                   "&linkpad.shortName;をサイドバーに表示する">
+<!ENTITY linkpad.overlay.accesskey                 "L">
+<!ENTITY linkpad.overlay.commandkey                "L">
+<!ENTITY linkpad.overlay.drop                      "ドロップしてリンクを&linkpad.shortName;に追加">
+<!ENTITY linkpad.overlay.context                   "このリンクを&linkpad.shortName;">
+<!ENTITY linkpad.overlay.page                      "このページを&linkpad.shortName;に追加">
+<!ENTITY linkpad.overlay.tab                       "このタブを&linkpad.shortName;に追加">
+
+<!-- Multiple Tab Handler -->
+<!ENTITY linkpad.multipletab.tab.selected          "選択したタブを&linkpad.shortName;に追加">
+
+<!-- Sidebar Panel -->
+<!ENTITY linkpad.panel.open.label                  "開く">
+<!ENTITY linkpad.panel.open.accesskey              "O">
+<!ENTITY linkpad.panel.openWin.label               "新規ウィンドウに開く">
+<!ENTITY linkpad.panel.openWin.accesskey           "N">
+<!ENTITY linkpad.panel.openTab.label               "新規タブに開く">
+<!ENTITY linkpad.panel.openTab.accesskey           "w">
+<!ENTITY linkpad.panel.clear.label                 "すべて削除">
+<!ENTITY linkpad.panel.clear.accesskey             "A">
+
+<!-- Preference Dialog -->
+<!ENTITY linkpad.prefs.title                       "&linkpad.shortName;">
+<!ENTITY linkpad.prefs.links.caption               "リンク">
+<!ENTITY linkpad.prefs.links.open.label            "Link Padのリンクを">
+<!ENTITY linkpad.prefs.links.open.accesskey        "e">
+<!ENTITY linkpad.prefs.links.open.current          "タブに開く">
+<!ENTITY linkpad.prefs.links.open.tab              "新規タブで開く">
+<!ENTITY linkpad.prefs.links.open.window           "新規ウィンドウで開く">
+<!ENTITY linkpad.prefs.links.click.label           "リンクを開く操作">
+<!ENTITY linkpad.prefs.links.click.accesskey       "p">
+<!ENTITY linkpad.prefs.links.click.single          "シングルクリック">
+<!ENTITY linkpad.prefs.links.click.double          "ダブルクリック">
+<!ENTITY linkpad.prefs.links.remove.label          "リンクを開くと同時に削除する">
+<!ENTITY linkpad.prefs.links.remove.accesskey      "R">
+<!ENTITY linkpad.prefs.dialogs.caption             "警告メッセージ">
+<!ENTITY linkpad.prefs.dialogs.clear.label         "すべてのリンクを削除するときは確認する">
+<!ENTITY linkpad.prefs.dialogs.clear.accesskey     "d">
+<!ENTITY linkpad.prefs.database.caption            "データベース (???)">
+<!ENTITY linkpad.prefs.database.sanitize.label     "&brandShortName;終了時に&linkpad.shortName;のリンクを消去する">
+<!ENTITY linkpad.prefs.database.sanitize.accesskey "s">
+<!ENTITY linkpad.prefs.database.compact.label      "最適化">
+<!ENTITY linkpad.prefs.database.compact.accesskey  "C">
