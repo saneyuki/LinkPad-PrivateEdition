@@ -1,8 +1,11 @@
 ## packages
 resource linkpad               modules/
-content  linkpad               chrome/content/
-skin     linkpad   classic/1.0 chrome/skin/classic/
-skin     linkpad   classic/1.0 chrome/skin/classic/darwin/ os=Darwin
+content  linkpad               jar:chrome/linkpad.jar!/content/
+skin     linkpad   classic/1.0 jar:chrome/linkpad.jar!/skin/classic/
+skin     linkpad   classic/1.0 jar:chrome/linkpad.jar!/skin/classic/darwin/ os=Darwin
+
+## modules
+resource linkpad   modules/
 
 ## overlays
 overlay chrome://browser/content/browser.xul    chrome://linkpad/content/linkpad.xul
@@ -14,5 +17,5 @@ overlay chrome://browser/content/places/places.xul   chrome://linkpad/content/li
 style   chrome://global/content/customizeToolbar.xul    chrome://linkpad/skin/linkpad.css
 
 ## locales
-locale   linkpad   en-US       chrome/locale/en-US/
-locale   linkpad   ja-JP       chrome/locale/ja/
+locale   linkpad   en-US       jar:chrome/linkpad.jar!/locale/en-US/
+locale   linkpad   ja-JP       jar:chrome/linkpad.jar!/locale/ja/
