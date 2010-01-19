@@ -258,7 +258,7 @@ LinkpadService.prototype = {
 		var statement = this._statements["clearItems"];
 		statement.execute();
 		// clear cache
-		this._items = [];
+		this._items = new Array();
 
 		this._notify(this, SERVICE_CLEAR_ITEMS);
 	},
