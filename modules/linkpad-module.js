@@ -374,5 +374,5 @@ LinkpadService.prototype = {
 	},
 
 };
-// initilize
+// initialize
 var LinkpadService = new LinkpadService();
