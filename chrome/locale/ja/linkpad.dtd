@@ -8,12 +8,12 @@
 <!ENTITY linkpad.overlay.accesskey                 "L">
 <!ENTITY linkpad.overlay.commandkey                "L">
 <!ENTITY linkpad.overlay.drop                      "ドロップしてリンクを&linkpad.shortName;に追加">
-<!ENTITY linkpad.overlay.context                   "このリンクを&linkpad.shortName;">
+<!ENTITY linkpad.overlay.context                   "このリンクを&linkpad.shortName;に追加">
 <!ENTITY linkpad.overlay.page                      "このページを&linkpad.shortName;に追加">
 <!ENTITY linkpad.overlay.tab                       "このタブを&linkpad.shortName;に追加">
 
 <!-- Multiple Tab Handler -->
-<!ENTITY linkpad.multipletab.tab.selected          "選択したタブを&linkpad.shortName;に追加">
+<!ENTITY linkpad.multipletab.tab.selected          "すべて&linkpad.shortName;に追加">
 
 <!-- Sidebar Panel -->
 <!ENTITY linkpad.panel.open.label                  "開く">
@@ -28,12 +28,12 @@
 <!-- Preference Dialog -->
 <!ENTITY linkpad.prefs.title                       "&linkpad.shortName;">
 <!ENTITY linkpad.prefs.links.caption               "リンク">
-<!ENTITY linkpad.prefs.links.open.label            "&linkpad.shortName;のリンクを">
+<!ENTITY linkpad.prefs.links.open.label            "&linkpad.shortName;のリンクを:">
 <!ENTITY linkpad.prefs.links.open.accesskey        "e">
-<!ENTITY linkpad.prefs.links.open.current          "タブに開く">
+<!ENTITY linkpad.prefs.links.open.current          "現在のタブに開く">
 <!ENTITY linkpad.prefs.links.open.tab              "新規タブで開く">
 <!ENTITY linkpad.prefs.links.open.window           "新規ウィンドウで開く">
-<!ENTITY linkpad.prefs.links.click.label           "リンクを開く操作">
+<!ENTITY linkpad.prefs.links.click.label           "リンクを開く操作:">
 <!ENTITY linkpad.prefs.links.click.accesskey       "p">
 <!ENTITY linkpad.prefs.links.click.single          "シングルクリック">
 <!ENTITY linkpad.prefs.links.click.double          "ダブルクリック">
