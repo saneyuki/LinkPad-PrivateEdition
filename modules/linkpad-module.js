@@ -227,7 +227,7 @@ LinkpadService.prototype = {
 		params.URL = aItem.URL;
 		params.title = aItem.title;
 		params.sortIndex = aItem.sortIndex;
-		statement.execute();
+		statement.executeAsync();
 
 		var items = this._items.filter(function(aObject) { return aObject.ID != ID; });
 		this._items = items;
@@ -245,7 +245,7 @@ LinkpadService.prototype = {
 
 		var statement = this._statements["removeItem"];
 		statement.params.ID = aID;
-		statement.execute();
+		statement.executeAsync();
 
 		var items = this._items.filter(function(aObject) { return aObject.ID != aID; });
 		this._items = items;
@@ -256,7 +256,7 @@ LinkpadService.prototype = {
 
 	clearItems: function SERVICE_clearItems() {
 		var statement = this._statements["clearItems"];
-		statement.execute();
+		statement.executeAsync();
 		// clear cache
 		this._items = new Array();
 
