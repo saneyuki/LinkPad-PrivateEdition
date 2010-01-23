@@ -339,15 +339,19 @@ LinkpadService.prototype = {
 		// check if we clear on shutdown
 		var branch = Components.classes["@mozilla.org/preferences-service;1"]
 		             .getService(Components.interfaces.nsIPrefService).getBranch("");
-		if (!branch.getBoolPref(SERVICE_PRIVACY)) {
-			return;
+		if (branch.getBoolPref(SERVICE_PRIVACY)) {
+			// clear the database
+			try {
+				this.clearItems();
+				this.compactDB();
+			} catch(e) {}
 		}
 
-		// clear the database
-		try {
-			this.clearItems();
-			this.compactDB();
-		} catch(e) {}
+		var statements = this._statements;
+		for (var name in statements) {
+			statements[name].finalize();
+		}
+		this._conn.close();
 	},
 
 	_unloadFinal: function SERVICE__unloadFinal() {
