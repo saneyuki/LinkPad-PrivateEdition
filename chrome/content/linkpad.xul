@@ -36,6 +36,14 @@
 		             oncommand="toggleSidebar('linkpad_panel');"/>
 	</broadcasterset>
 
+	<popupset id="mainPopupSet">
+		<menupopup  id="linkpad-tabContext">
+			<menuitem id="linkpad_saveThisTab"
+			          label="&linkpad.overlay.tab;"
+			          oncommand="Linkpad.saveThisTab();"/>
+		</menupopup>
+	</popupset>
+
 	<popup id="contentAreaContextMenu">
 		<menuitem id="linkpad_saveContextLink"
 		          label="&linkpad.overlay.context;"

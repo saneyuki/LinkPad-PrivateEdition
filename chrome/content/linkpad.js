@@ -16,7 +16,8 @@ var Linkpad = {
 		context.addEventListener("popupshowing", function () { self.onPopupShowing(); }, false);
 
 		//set tab context
-		this.SetTabMenuItem();
+		this.insertTabMenuItemBefore("linkpad_saveThisTab",
+		                             document.getElementById("context_bookmarkAllTabs").nextSibling);
 	},
 
 	onUnload: function Linkpad_onUnload() {
@@ -24,43 +25,18 @@ var Linkpad = {
 
 	//Control ContentArea's ContextMenuItem
 	onPopupShowing: function Linkpad_onPopupShowing() {
-		var menuitem_context = document.getElementById("linkpad_saveContextLink");
-		if (gContextMenu.onSaveableLink) {
-			menuitem_context.removeAttribute("hidden");
-		}
-		else {
-			menuitem_context.setAttribute("hidden", "true");
-		}
-
-		var menuitem_page = document.getElementById("linkpad_saveThisPage");
-		if (!(gContextMenu.isContentSelected || gContextMenu.onTextInput ||
-			  gContextMenu.onLink ||gContextMenu.onImage ||
-			  gContextMenu.onVideo || gContextMenu.onAudio)) {
-			menuitem_page.removeAttribute("hidden");
-		}
-		else {
-			menuitem_page.setAttribute("hidden", "true");
-		}
+		gContextMenu.showItem("linkpad_saveContextLink",
+		                      gContextMenu.onSaveableLink);
+		gContextMenu.showItem("linkpad_saveThisPage",
+		                      !(gContextMenu.isContentSelected || gContextMenu.onTextInput || gContextMenu.onLink ||
+		                        gContextMenu.onImage || gContextMenu.onVideo || gContextMenu.onAudio));
 	},
 
 	//Add MenuItem to Tab Context Menu
-	SetTabMenuItem: function Linkpad_SetTabMenuItem() {
-		var strbundle = document.getElementById("linkpad_bundle");
-		var itemlabel = strbundle.getString("linkpad.overlay.tab");
+	insertTabMenuItemBefore: function Linkpad_setTabMenuItem(aItemId, aReferenceItem) {
 		var tabContextMenu = document.getAnonymousElementByAttribute(gBrowser, "anonid", "tabContextMenu");
-		var item = document.createElement("menuitem");
-
-		item.setAttribute("id", "linkpad_saveThisTab");
-		item.setAttribute("label", itemlabel);
-		item.setAttribute("oncommand", "Linkpad.saveThisTab();");
-
-		var node = document.getElementById('context_bookmarkAllTabs').nextSibling;
-		tabContextMenu.insertBefore(item, node);
-		/*
-		var separator = document.createElement("menuseparator");
-		separator.setAttribute("id", "linkpad_separator-tab");
-		tabContextMenu.insertBefore(separator, Node);
-		*/
+		var menuItem = document.getElementById(aItemId);
+		tabContextMenu.insertBefore(menuItem, aReferenceItem);
 	},
 
 	//This function's old name is "saveContext()"
