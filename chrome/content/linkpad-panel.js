@@ -133,7 +133,7 @@ var LinkpadPanel = {
 		var ID = aItem.ID;
 
 		// create the list item
-		var node = document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "listitem");
+		var node = document.createElement("listitem");
 		node.setAttribute("id", ID + "_listitem");
 		node.setAttribute("itemid", ID);
 		node.setAttribute("class", "linkpad-item listitem-iconic");
