@@ -271,6 +271,9 @@ LinkpadService.prototype = {
 	},
 
 	_load: function SERVICE_load() {
+
+		Components.utils.import("resource://linkpad/Preferences.js");
+
 		// get observer service and add observers
 		this._obs = Components.classes["@mozilla.org/observer-service;1"]
 		            .getService(Components.interfaces.nsIObserverService);
@@ -337,9 +340,7 @@ LinkpadService.prototype = {
 	_unload: function SERVICE__unload() {
 
 		// check if we clear on shutdown
-		var branch = Components.classes["@mozilla.org/preferences-service;1"]
-		             .getService(Components.interfaces.nsIPrefService).getBranch("");
-		if (branch.getBoolPref(SERVICE_PRIVACY)) {
+		if (Preferences.get(SERVICE_PRIVACY)) {
 			// clear the database
 			try {
 				this.clearItems();

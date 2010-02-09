@@ -15,7 +15,7 @@ var LinkpadPanel = {
 			}, 0);
 		}
 		else if (aTopic == "nsPref:changed" && aData == "openClickCount") {
-			var count = this.branch.getIntPref("openClickCount");
+			var count = this.branch.get("openClickCount");
 			this.listbox.setAttribute("clickcount", String(count));
 		}
 	},
@@ -35,9 +35,7 @@ var LinkpadPanel = {
 	_branch: null,
 	get branch() {
 		if (!this._branch) {
-			this._branch = Components.classes["@mozilla.org/preferences-service;1"]
-			               .getService(Components.interfaces.nsIPrefService)
-			               .getBranch(this.domain);
+			this._branch = (new Preferences(this.domain));
 		}
 		return this._branch;
 	},
@@ -67,14 +65,15 @@ var LinkpadPanel = {
 
 	onLoad: function LinkpadPanel_onLoad() {
 		// Import JavaScript Compornent code module.
+		Components.utils.import("resource://linkpad/Preferences.js");
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		// hookup the command controller
 		this.listbox.controllers.appendController(this);
 
 		// hookup pref observer
-		this.branch.QueryInterface(Components.interfaces.nsIPrefBranch2).addObserver("", this, false);
-		var count = this.branch.getIntPref("openClickCount");
+		Preferences.observe("", this);
+		var count = this.branch.get("openClickCount");
 		this.listbox.setAttribute("clickcount", String(count));
 
 		// add ourself to the observer service
@@ -93,7 +92,7 @@ var LinkpadPanel = {
 		this.dnd.parentNode = null;
 
 		// remove the observer
-		this.branch.QueryInterface(Components.interfaces.nsIPrefBranch2).removeObserver("", this);
+		Preferences.ignore("", this);
 		this.observers.removeObserver(this, "netscape-linkpad");
 
 		// remove variables
@@ -255,7 +254,7 @@ var LinkpadPanel = {
 			return;
 		}
 		var where = (!aOverride) ? this.determineWhere(): aOverride;
-		if (this.branch.getBoolPref("removeLinkOnOpen")) {
+		if (this.branch.get("removeLinkOnOpen")) {
 			this.setSelection(item);
 			this.service.deleteItem(item.getAttribute("itemid"));
 		}
@@ -289,7 +288,7 @@ var LinkpadPanel = {
 	},
 
 	determineWhere: function LinkpadPanel_determineWhere() {
-		var prefVal = this.branch.getIntPref("open");
+		var prefVal = this.branch.get("open");
 		var where = "current";
 		switch (prefVal) {
 			case 3:
@@ -313,7 +312,7 @@ var LinkpadPanel = {
 		if ((aEvent.button !== 0) && (aEvent.button != 1)) {
 			return;
 		}
-		if (aCount != this.branch.getIntPref("openClickCount")) {
+		if (aCount != this.branch.get("openClickCount")) {
 			return;
 		}
 		this.openLink();
@@ -344,7 +343,7 @@ var LinkpadPanel = {
 	},
 
 	confirmClear: function LinkpadPanel_confirmClear() {
-		var dontAsk = !this.branch.getBoolPref("showClear");
+		var dontAsk = !this.branch.get("showClear");
 		if (dontAsk) {
 			return true;
 		}
@@ -359,7 +358,7 @@ var LinkpadPanel = {
 		if (!clear) {
 			return false;
 		}
-		this.branch.setBoolPref("showClear", !checkbox.value);
+		this.branch.set("showClear", !checkbox.value);
 		return true;
 	},
 
