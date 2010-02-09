@@ -9,7 +9,7 @@ var LinkpadPanel = {
 			var self = this;
 			window.setTimeout(function() {
 				try {
-					self[aData](aSubject.wrappedJSObject);
+					self[aData](aSubject);
 				}
 				catch(e) {}
 			}, 0);
@@ -40,15 +40,6 @@ var LinkpadPanel = {
 		return this._branch;
 	},
 
-	_observers: null,
-	get observers() {
-		if (!this._observers) {
-			this._observers = Components.classes["@mozilla.org/observer-service;1"]
-			                  .getService(Components.interfaces.nsIObserverService);
-		}
-		return this._observers;
-	},
-
 	get clipboard() {
 		delete this.clipboard;
 		return this.clipboard = (new LinkpadClipboard());
@@ -65,6 +56,7 @@ var LinkpadPanel = {
 
 	onLoad: function LinkpadPanel_onLoad() {
 		// Import JavaScript Compornent code module.
+		Components.utils.import("resource://linkpad/Observers.js");
 		Components.utils.import("resource://linkpad/Preferences.js");
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
@@ -77,7 +69,7 @@ var LinkpadPanel = {
 		this.listbox.setAttribute("clickcount", String(count));
 
 		// add ourself to the observer service
-		this.observers.addObserver(this, "netscape-linkpad", false);
+		Observers.add("netscape-linkpad", this);
 
 		// load the listbox and focus it
 		this.loadListbox();
@@ -93,7 +85,7 @@ var LinkpadPanel = {
 
 		// remove the observer
 		Preferences.ignore("", this);
-		this.observers.removeObserver(this, "netscape-linkpad");
+		Observers.remove("netscape-linkpad", this);
 
 		// remove variables
 		this.clipboard = null;

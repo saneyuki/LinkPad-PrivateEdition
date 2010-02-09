@@ -65,13 +65,6 @@ function sorter(a, b) {
 }
 
 /*******************************************************************************
- * Helper function to access to objects wrapped with xpconnect.
- ******************************************************************************/
-function wrapper(aObject) {
-	return { wrappedJSObject: aObject };
-}
-
-/*******************************************************************************
  * interfaced used to describe link items stored in the linkpad service.
  * 
  * @version   1.0
@@ -271,14 +264,12 @@ LinkpadService.prototype = {
 	},
 
 	_load: function SERVICE_load() {
-
+		Components.utils.import("resource://linkpad/Observers.js");
 		Components.utils.import("resource://linkpad/Preferences.js");
 
 		// get observer service and add observers
-		this._obs = Components.classes["@mozilla.org/observer-service;1"]
-		            .getService(Components.interfaces.nsIObserverService);
-		this._obs.addObserver(this, TOPIC_SHUTDOWN_APP, false);
-		this._obs.addObserver(this, TOPIC_SHUTDOWN_XPCOM, false);
+		Observers.add(TOPIC_SHUTDOWN_APP, this);
+		Observers.add(TOPIC_SHUTDOWN_XPCOM, this);
 		this._addObserve = true;
 
 		// setup empty cache
@@ -358,8 +349,8 @@ LinkpadService.prototype = {
 	_unloadFinal: function SERVICE__unloadFinal() {
 
 		// remove observers
-		this._obs.removeObserver(this, TOPIC_SHUTDOWN_APP);
-		this._obs.removeObserver(this, TOPIC_SHUTDOWN_XPCOM);
+		Observers.remove(TOPIC_SHUTDOWN_APP, this);
+		Observers.remove(TOPIC_SHUTDOWN_XPCOM, this);
 
 		// remove variables
 		this._statements = null;
@@ -370,9 +361,8 @@ LinkpadService.prototype = {
 
 	// notify observers
 	_notify: function SERVICE__notify(aSubject, aData) {
-		var subject = wrapper(aSubject);
 		try {
-			this._obs.notifyObservers(subject, TOPIC_DEFAULT, aData);
+			Observers.notify(TOPIC_DEFAULT, aSubject, aData);
 		} catch(e) {
 			Components.utils.reportError(e);
 		}
