@@ -1,8 +1,11 @@
 var LinkpadPlaces = {
 
+	_service: null,
 	get service() {
-		delete this.service;
-		return this.service = LinkpadService;
+		if (!this._service) {
+			this._service = LinkpadService;
+		}
+		return this._service;
 	},
 
 	onLoad: function Linkpad_onLoad() {

@@ -1,8 +1,11 @@
 var Linkpad = {
 
+	_service: null,
 	get service() {
-		delete this.service;
-		return this.service = LinkpadService;
+		if (!this._service) {
+			this._service = LinkpadService;
+		}
+		return this._service;
 	},
 
 	onLoad: function Linkpad_onLoad() {
@@ -16,8 +19,8 @@ var Linkpad = {
 		context.addEventListener("popupshowing", function () { self.onPopupShowing(); }, false);
 
 		//set tab context
-		this.insertTabMenuItemBefore("linkpad_saveThisTab",
-		                             document.getElementById("context_bookmarkAllTabs").nextSibling);
+		this.insertAllToTabCtx("linkpad_tabContext",
+		                       document.getElementById("context_bookmarkAllTabs").nextSibling);
 	},
 
 	onUnload: function Linkpad_onUnload() {
@@ -32,11 +35,17 @@ var Linkpad = {
 		                        gContextMenu.onImage || gContextMenu.onVideo || gContextMenu.onAudio));
 	},
 
-	//Add MenuItem to Tab Context Menu
-	insertTabMenuItemBefore: function Linkpad_setTabMenuItem(aItemId, aReferenceItem) {
+	insertAllToTabCtx: function AddDToUnsortBkm_insertAllToTabCtx(aId, aReference) {
+		var itemsParent = document.getElementById(aId);
+		while (itemsParent.hasChildNodes()) {
+			var node = itemsParent.firstChild;
+			this.insertToTabCtxBefore(node, aReference);
+		}
+	},
+
+	insertToTabCtxBefore: function AddDToUnsortBkm_insertToTabCtxBefore(aElem, aReference) {
 		var tabContextMenu = document.getAnonymousElementByAttribute(gBrowser, "anonid", "tabContextMenu");
-		var menuItem = document.getElementById(aItemId);
-		tabContextMenu.insertBefore(menuItem, aReferenceItem);
+		tabContextMenu.insertBefore(aElem, aReference);
 	},
 
 	//This function's old name is "saveContext()"

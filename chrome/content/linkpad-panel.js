@@ -20,26 +20,35 @@ var LinkpadPanel = {
 		}
 	},
 
+	_service: null,
 	get service() {
-		delete this.service;
-		return this.service = LinkpadService;
+		if (!this._service) {
+			this._service = LinkpadService;
+		}
+		return this._service;
 	},
 
 	get domain() {
 		return "extensions.netscape.linkpad.";
 	},
-	
+
+	_branch: null,
 	get branch() {
-		delete this.branch;
-		return this.branch = Components.classes["@mozilla.org/preferences-service;1"]
-		                     .getService(Components.interfaces.nsIPrefService)
-		                     .getBranch(this.domain);
+		if (!this._branch) {
+			this._branch = Components.classes["@mozilla.org/preferences-service;1"]
+			               .getService(Components.interfaces.nsIPrefService)
+			               .getBranch(this.domain);
+		}
+		return this._branch;
 	},
 
+	_observers: null,
 	get observers() {
-		delete this.observers;
-		return this.observers = Components.classes["@mozilla.org/observer-service;1"]
-		                        .getService(Components.interfaces.nsIObserverService);
+		if (!this._observers) {
+			this._observers = Components.classes["@mozilla.org/observer-service;1"]
+			                  .getService(Components.interfaces.nsIObserverService);
+		}
+		return this._observers;
 	},
 
 	get clipboard() {

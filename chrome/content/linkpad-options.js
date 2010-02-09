@@ -1,8 +1,11 @@
 var LinkpadOptions = {
 
+	_service: null,
 	get service() {
-		delete this.service;
-		return this.service = LinkpadService;
+		if (!this._service) {
+			this._service = LinkpadService;
+		}
+		return this._service;
 	},
 
 	onLoad: function LinkpadOptions_onLoad() {
@@ -56,6 +59,6 @@ var LinkpadOptions = {
 			var label = this.getString("linkpad.prefs.database.unknown");
 			document.getElementById("database_caption").setAttribute("label", label);
 		}
-			catch(e) {}
+		catch(e) {}
 	}
 };

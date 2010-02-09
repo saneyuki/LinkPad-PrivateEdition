@@ -37,7 +37,7 @@
 	</broadcasterset>
 
 	<popupset id="mainPopupSet">
-		<menupopup  id="linkpad-tabContext">
+		<menupopup  id="linkpad_tabContext">
 			<menuitem id="linkpad_saveThisTab"
 			          label="&linkpad.overlay.tab;"
 			          oncommand="Linkpad.saveThisTab();"/>
