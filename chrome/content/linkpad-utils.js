@@ -2,6 +2,7 @@
  * Import JavaScript Compornent code module.
  ******************************************************************************/
 Components.utils.import("resource://linkpad/linkpad-module.js");
+Components.utils.import("resource://linkpad/StringBundle.js");
 
 /*******************************************************************************
  * Helper function to convert a linkpad item to and from transferable data.
@@ -271,28 +272,23 @@ LinkpadDnD.prototype = {
 	_statusText: null,
 	get statusText() {
 		if (!this._statusText) {
-			this._statusText = this.getString("linkpad.overlay.drop");
+			this._statusText = this.strings.get("linkpad.overlay.drop");
 		}
 		return this._statusText;
+	},
+
+	_strings: null,
+	get strings() {
+		if (!this._strings) {
+			this._strings = (new StringBundle("chrome://linkpad/locale/linkpad.properties"));
+		}
+		return this._strings;
 	},
 
 	getTypes: function LinkpadDnD_getTypes() {
 		var types = ["text/x-linkpad-item", "moz/bookmarkclipboarditem",
 		             "text/x-moz-url", "text/x-moz-text-internal", "text/unicode", "text/html"];
 		return types;
-	},
-
-	getString: function lpp_getString(aName, aReplace) {
-		var bundle = document.getElementById("linkpad_bundle");
-		if (!bundle) {
-			return null;
-		}
-		if (!aReplace) {
-			return bundle.getString(aName);
-		}
-		else {
-			return bundle.getFormattedString(aName, aReplace);
-		}
 	},
 
 	setDragOver: function LinkpadDnD_setDragOver(aNode, aEnable, aValue) {

@@ -8,8 +8,17 @@ var LinkpadOptions = {
 		return this._service;
 	},
 
+	_strings: null,
+	get strings() {
+		if (!this._strings) {
+			this._strings = (new StringBundle("chrome://linkpad/locale/linkpad.properties"));
+		}
+		return this._strings;
+	},
+
 	onLoad: function LinkpadOptions_onLoad() {
 		// Import JavaScript Compornent code module.
+		Components.utils.import("resource://linkpad/StringBundle.js");
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		this.getDBSize();
@@ -20,7 +29,7 @@ var LinkpadOptions = {
 		var format, value;
 		if (!dbFile) {
 			format = "linkpad.prefs.database.unknown";
-			value = this.getString(format);
+			value = this.strings.get(format);
 		}
 		else {
 			var fileSize = dbFile.fileSize;
@@ -28,35 +37,22 @@ var LinkpadOptions = {
 			var MB = parseInt(KB/1024);
 			if (MB > 0) {
 				format = "linkpad.prefs.database.MB";
-				value = this.getString(format, [MB]);
+				value = this.strings.get(format, [MB]);
 			} else if (KB > 0) {
 				format = "linkpad.prefs.database.KB";
-				value = this.getString(format, [KB]);
+				value = this.strings.get(format, [KB]);
 			} else {
 				format = "linkpad.prefs.database.B";
-				value = this.getString(format, [fileSize]);
+				value = this.strings.get(format, [fileSize]);
 			}
 		}
 		document.getElementById("database_caption").setAttribute("label", value);
 	},
 
-	getString: function LinkpadOptions_getString(aName, aReplace) {
-		var bundle = document.getElementById("linkpad_bundle");
-		if (!bundle) {
-			return "";
-		}
-		if (!aReplace) {
-			return bundle.getString(aName);
-		}
-		else {
-			return bundle.getFormattedString(aName, aReplace);
-		}
-	},
-
 	compactDB: function LinkpadOptions_compactDB() {
 		try {
 			this.service.compactDB();
-			var label = this.getString("linkpad.prefs.database.unknown");
+			var label = this.strings.get("linkpad.prefs.database.unknown");
 			document.getElementById("database_caption").setAttribute("label", label);
 		}
 		catch(e) {}

@@ -339,9 +339,9 @@ var LinkpadPanel = {
 		if (dontAsk) {
 			return true;
 		}
-		var title = this.dnd.getString("linkpad.panel.clear.title");
-		var message = this.dnd.getString("linkpad.panel.clear.message");
-		var show = this.dnd.getString("linkpad.panel.clear.show");
+		var title = this.dnd.strings.get("linkpad.panel.clear.title");
+		var message = this.dnd.strings.get("linkpad.panel.clear.message");
+		var show = this.dnd.strings.get("linkpad.panel.clear.show");
 
 		var prompt = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
 		             .getService(Components.interfaces.nsIPromptService);
