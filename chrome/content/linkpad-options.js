@@ -18,7 +18,7 @@ var LinkpadOptions = {
 
 	onLoad: function LinkpadOptions_onLoad() {
 		// Import JavaScript Compornent code module.
-		Components.utils.import("resource://linkpad/StringBundle.js");
+		Components.utils.import("resource://linkpad/Utils.js");
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		this.getDBSize();

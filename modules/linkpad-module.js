@@ -264,8 +264,7 @@ LinkpadService.prototype = {
 	},
 
 	_load: function SERVICE_load() {
-		Components.utils.import("resource://linkpad/Observers.js");
-		Components.utils.import("resource://linkpad/Preferences.js");
+		Components.utils.import("resource://linkpad/Utils.js");
 
 		// get observer service and add observers
 		Observers.add(TOPIC_SHUTDOWN_APP, this);

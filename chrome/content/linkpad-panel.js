@@ -56,15 +56,13 @@ var LinkpadPanel = {
 
 	onLoad: function LinkpadPanel_onLoad() {
 		// Import JavaScript Compornent code module.
-		Components.utils.import("resource://linkpad/Observers.js");
-		Components.utils.import("resource://linkpad/Preferences.js");
-		Components.utils.import("resource://linkpad/linkpad-module.js");
+		Components.utils.import("resource://linkpad/Utils.js");
 
 		// hookup the command controller
 		this.listbox.controllers.appendController(this);
 
 		// hookup pref observer
-		Preferences.observe("", this);
+		this.branch.observe("", this);
 		var count = this.branch.get("openClickCount");
 		this.listbox.setAttribute("clickcount", String(count));
 
