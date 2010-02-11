@@ -82,7 +82,7 @@ var LinkpadPanel = {
 		this.dnd.parentNode = null;
 
 		// remove the observer
-		Preferences.ignore("", this);
+		this.branch.ignore("", this);
 		Observers.remove("netscape-linkpad", this);
 
 		// remove variables
