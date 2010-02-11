@@ -3,29 +3,30 @@
  * The following codes are based on <https://wiki.mozilla.org/Labs/JS_Modules>.
  * @License     MPL 1.1/GPL 2.0/LGPL 2.1
  * @developer   saneyuki
+ * @version     20100211.1
  */
 
 var EXPORTED_SYMBOLS = ["Preferences", "Observers", "StringBundle"];
 
 /**
  * Preferences Utils
- * @version 0.1
+ * @version 0.1.20100211.1
  */
-function Preferences(aPrefDomain) {
-	if (aPrefDomain) {
-		this._prefDomain = aPrefDomain;
+function Preferences(aPrefBranch) {
+	if (aPrefBranch) {
+		this._prefBranch = aPrefBranch;
 	}
 }
 Preferences.prototype = {
 
-	_prefDomain: "",
+	_prefBranch: "",
 
 	_prefSvc: null,
 	get prefSvc() {
 		if (!this._prefSvc) {
 			this._prefSvc = Components.classes["@mozilla.org/preferences-service;1"]
 			                .getService(Components.interfaces.nsIPrefService)
-			                .getBranch(this._prefDomain)
+			                .getBranch(this._prefBranch)
 			                .QueryInterface(Components.interfaces.nsIPrefBranch2);
 		}
 		return this._prefSvc;
@@ -79,19 +80,21 @@ Preferences.prototype = {
 		this.prefSvc.resetBranch(aPrefBranch);
 	},
 
-	observe: function (aPrefDomain, aObsObj) {
-		this.prefSvc.addObserver(aPrefDomain, aObsObj, false);
+	observe: function (aPrefBranch, aObsObj) {
+		var prefBranch = this._prefBranch + (aPrefBranch || "");
+		this.prefSvc.addObserver(prefBranch, aObsObj, false);
 	},
 
-	ignore: function (aPrefDomain, aObsObj) {
-		this.prefSvc.removeObserver(aPrefDomain, aObsObj);
+	ignore: function (aPrefBranch, aObsObj) {
+		var prefBranch = this._prefBranch + (aPrefBranch || "");
+		this.prefSvc.removeObserver(prefBranch, aObsObj);
 	},
 };
 Preferences.__proto__ = Preferences.prototype;
 
 /**
  * Observers Utils
- * @version 0.1
+ * @version 0.1.20100211.1
  */
 var Observers = {
 	_observers: null,
@@ -144,7 +147,7 @@ Observer.prototype = {
 
 /**
  * StringBundle Utils
- * @version 0.1
+ * @version 0.1.20100211.1
  */
 function StringBundle(aURI) {
 	this.propertiesURI = aURI;
@@ -173,6 +176,10 @@ StringBundle.prototype = {
 	},
 };
 
+/**
+ * StringBundle Utils
+ * @version 0.1.20100211.1
+ */
 var Console = {
 
 	_console: null,
