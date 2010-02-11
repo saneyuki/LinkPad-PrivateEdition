@@ -1,10 +1,7 @@
 /*******************************************************************************
- * Export Symbols, Stand by using FUEL.
+ * Export Symbols.
  ******************************************************************************/
 var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService"];
-
-var Application = Components.classes["@mozilla.org/fuel/application;1"]
-                  .getService(Components.interfaces.fuelIApplication);
 
 /*******************************************************************************
  * Observer topics

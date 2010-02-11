@@ -3,14 +3,14 @@
  * The following codes are based on <https://wiki.mozilla.org/Labs/JS_Modules>.
  * @License     MPL 1.1/GPL 2.0/LGPL 2.1
  * @developer   saneyuki
- * @version     20100211.1
+ * @version     20100211.2
  */
 
 var EXPORTED_SYMBOLS = ["Preferences", "Observers", "StringBundle"];
 
 /**
  * Preferences Utils
- * @version 0.1.20100211.1
+ * @version 0.1.20100211.2
  */
 function Preferences(aPrefBranch) {
 	if (aPrefBranch) {
@@ -81,13 +81,11 @@ Preferences.prototype = {
 	},
 
 	observe: function (aPrefBranch, aObsObj) {
-		var prefBranch = this._prefBranch + (aPrefBranch || "");
-		this.prefSvc.addObserver(prefBranch, aObsObj, false);
+		this.prefSvc.addObserver(aPrefBranch, aObsObj, false);
 	},
 
 	ignore: function (aPrefBranch, aObsObj) {
-		var prefBranch = this._prefBranch + (aPrefBranch || "");
-		this.prefSvc.removeObserver(prefBranch, aObsObj);
+		this.prefSvc.removeObserver(aPrefBranch, aObsObj);
 	},
 };
 Preferences.__proto__ = Preferences.prototype;
@@ -177,7 +175,7 @@ StringBundle.prototype = {
 };
 
 /**
- * StringBundle Utils
+ * Console Utils
  * @version 0.1.20100211.1
  */
 var Console = {
