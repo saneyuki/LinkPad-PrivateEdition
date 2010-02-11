@@ -17,10 +17,6 @@
 		]]>
 	</script>
 
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="linkpad_bundle" src="chrome://linkpad/locale/linkpad.properties"/>
-	</stringbundleset>
-
 	<keyset id="mainKeyset">
 		<key id="linkpad_key" key="&linkpad.overlay.commandkey;"
 		     command="linkpad_panel" modifiers="accel,shift"/>
