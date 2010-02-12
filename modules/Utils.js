@@ -3,7 +3,7 @@
  * The following codes are based on <https://wiki.mozilla.org/Labs/JS_Modules>.
  * @License     MPL 1.1/GPL 2.0/LGPL 2.1
  * @developer   saneyuki
- * @version     20100211.2
+ * @version     20100212.1
  */
 
 var EXPORTED_SYMBOLS = ["Preferences", "Observers", "StringBundle"];
@@ -92,7 +92,7 @@ Preferences.__proto__ = Preferences.prototype;
 
 /**
  * Observers Utils
- * @version 0.1.20100211.1
+ * @version 0.1.20100212.1
  */
 var Observers = {
 	_observers: null,
@@ -113,11 +113,10 @@ var Observers = {
 	remove: function (aTopic, aObsObj) {
 		var observerArray = ObserverCache.filter(function(aElm){ return (aElm.topic == aTopic &&
 		                                                                 aElm.obsObj == aObsObj); });
-		var self = this;
-		observerArray.map(function(aElem){
-			self.observers.removeObserver(aElem, aTopic);
+		observerArray.forEach(function(aElem){
+			this.observers.removeObserver(aElem, aTopic);
 			ObserverCache.splice(ObserverCache.indexOf(aElem), 1);
-		});
+		}, this);
 	},
 
 	notify: function (aTopic, aSubject, aData) {

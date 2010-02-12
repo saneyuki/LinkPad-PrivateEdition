@@ -19,7 +19,7 @@ var LinkpadMultipleTab = {
 
 	//Save Selected Tabs from TabBar, When use Extension: Multiple Tab Handler.
 	saveSelectedTabs: function LinkpadMultipleTab_saveSelectedTabs() {
-		MultipleTabService.getSelectedTabs().map(function(aTab) {
+		MultipleTabService.getSelectedTabs().forEach(function(aTab) {
 			Linkpad.saveItem(aTab.linkedBrowser.currentURI.spec,
 			                 aTab.linkedBrowser.contentDocument.title || aTab.getAttribute("label"));
 		});
