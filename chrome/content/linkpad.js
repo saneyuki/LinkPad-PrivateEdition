@@ -40,7 +40,9 @@ var Linkpad = {
 
 	onUnLoad: function Linkpad_onUnload() {
 		window.removeEventListener("unload", this, false);
-		window.removeEventListener("popupshowing", this, false);
+
+		var context = document.getElementById("contentAreaContextMenu");
+		context.removeEventListener("popupshowing", this, false);
 	},
 
 	//Control ContentArea's ContextMenuItem
