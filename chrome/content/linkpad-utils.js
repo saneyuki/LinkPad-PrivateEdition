@@ -451,7 +451,7 @@ LinkpadDnD.prototype = {
  ******************************************************************************/
 function isValidLinkpadItem(aItem) {
 	function isURL(aString) {
-		var regexp = /(ftp|http|https|gopher|file):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+		var regexp = /(ftp:\/\/|http:\/\/|https:\/\/|gopher:\/\/|file:\/\/|about:)(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 		return regexp.test(aString);
 	}
 
