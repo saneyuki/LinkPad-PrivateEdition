@@ -7,11 +7,6 @@
          windowtype="linkpad:history">
 
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-history.js"></script>
-	<script type="application/x-javascript">
-		<![CDATA[
-			window.addEventListener("load", function () { LinkpadHistory.onLoad(); }, false);
-		]]>
-	</script>
 
 	<popup id="placesContext">
 		<menuitem id="linkpad_saveContext-history"

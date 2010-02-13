@@ -1,6 +1,16 @@
 var LinkpadMultipleTab = {
 
+	handleEvent: function (aEvent) {
+		switch (aEvent.type) {
+			case "load":
+				this.onLoad();
+				break;
+		}
+	},
+
 	onLoad: function LinkpadMultipleTab_onLoad() {
+		window.removeEventListener("load", this, false);
+
 		this.ChangeInsertionPoint();
 		this.removeTabItem();
 	},
@@ -25,3 +35,4 @@ var LinkpadMultipleTab = {
 		});
 	}
 };
+window.addEventListener("load", LinkpadMultipleTab, false);

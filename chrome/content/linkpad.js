@@ -8,22 +8,39 @@ var Linkpad = {
 		return this._service;
 	},
 
+	handleEvent: function (aEvent) {
+		switch (aEvent.type) {
+			case "load":
+				this.onLoad();
+				break;
+			case "popupshowing":
+				this.onPopupShowing();
+				break;
+			case "unload":
+				this.onUnLoad();
+				break;
+		}
+	},
+
 	onLoad: function Linkpad_onLoad() {
+		window.removeEventListener("load", this, false);
+		window.addEventListener("unload", this, false);
 
 		// Import JavaScript Compornent code module
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		// hookup context listener
-		var self = this;
 		var context = document.getElementById("contentAreaContextMenu");
-		context.addEventListener("popupshowing", function () { self.onPopupShowing(); }, false);
+		context.addEventListener("popupshowing", this, false);
 
 		//set tab context
 		this.insertAllToTabCtx("linkpad_tabContext",
 		                       document.getElementById("context_bookmarkAllTabs").nextSibling);
 	},
 
-	onUnload: function Linkpad_onUnload() {
+	onUnLoad: function Linkpad_onUnload() {
+		window.removeEventListener("unload", this, false);
+		window.removeEventListener("popupshowing", this, false);
 	},
 
 	//Control ContentArea's ContextMenuItem
@@ -75,3 +92,4 @@ var Linkpad = {
 		this.service.createItem(aURI, aTitle, 0);
 	},
 };
+window.addEventListener("load", Linkpad, false);

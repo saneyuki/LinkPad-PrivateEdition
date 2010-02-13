@@ -7,11 +7,6 @@
          windowtype="linkpad:places">
 
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-places.js"></script>
-	<script type="application/x-javascript">
-		<![CDATA[
-			window.addEventListener("load", function () { LinkpadPlaces.onLoad(); }, false);
-		]]>
-	</script>
 
 	<popup id="placesContext">
 		<menuitem id="linkpad_saveContext-places"

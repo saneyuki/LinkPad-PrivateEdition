@@ -7,11 +7,6 @@
          windowtype="linkpad:multipletab">
 
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-multipletab.js"></script>
-	<script type="application/x-javascript">
-		<![CDATA[
-			window.addEventListener("load", function () { LinkpadMultipleTab.onLoad(); }, false);
-		]]>
-	</script>
 
 	<!-- Set Item to Tab-Context by using Multiple Tab Handler's API -->
 	<menupopup id="multipletab-tabcontext-menu-template">

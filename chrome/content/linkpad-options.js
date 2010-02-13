@@ -16,7 +16,17 @@ var LinkpadOptions = {
 		return this._strings;
 	},
 
+	handleEvent: function (aEvent) {
+		switch (aEvent.type) {
+			case "load":
+				this.onLoad();
+				break;
+		}
+	},
+
 	onLoad: function LinkpadOptions_onLoad() {
+		window.removeEventListener("load", this, false);
+
 		// Import JavaScript Compornent code module.
 		Components.utils.import("resource://linkpad/Utils.js");
 		Components.utils.import("resource://linkpad/linkpad-module.js");
@@ -58,3 +68,4 @@ var LinkpadOptions = {
 		catch(e) {}
 	}
 };
+window.addEventListener("load", LinkpadOptions, false);

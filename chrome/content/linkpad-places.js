@@ -8,7 +8,17 @@ var LinkpadPlaces = {
 		return this._service;
 	},
 
+	handleEvent: function (aEvent) {
+		switch (aEvent.type) {
+			case "load":
+				this.onLoad();
+				break;
+		}
+	},
+
 	onLoad: function Linkpad_onLoad() {
+		window.removeEventListener("load", this, false);
+
 		// Import JavaScript Compornent code module.
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 		
@@ -39,3 +49,4 @@ var LinkpadPlaces = {
 		}
 	}
 };
+window.addEventListener("load", LinkpadPlaces, false);

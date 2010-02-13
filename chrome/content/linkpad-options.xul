@@ -14,8 +14,9 @@
             id="linkpad_options"
             windowtype="linkpad:options"
             title="&linkpad.prefs.title;"
-            onload="LinkpadOptions.onLoad();"
             type="prefwindow">
+
+	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-options.js"></script>
 
 	<prefpane id="linkpad_pane">
 
@@ -36,12 +37,6 @@
 			            name="extensions.netscape.linkpad.showClear"
 			            type="bool" />
 		</preferences>
-
-		<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-options.js"></script>
-
-		<stringbundleset id="mainStringbundleSet">
-			<stringbundle id="linkpad_bundle" src="chrome://linkpad/locale/linkpad.properties" />
-		</stringbundleset>
 
 		<groupbox id="linkpad_links">
 				<caption label="&linkpad.prefs.links.caption;" />

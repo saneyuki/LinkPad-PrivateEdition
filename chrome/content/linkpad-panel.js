@@ -54,7 +54,21 @@ var LinkpadPanel = {
 		return document.getElementById("linkpad_listbox");
 	},
 
+	handleEvent: function (aEvent) {
+		switch (aEvent.type) {
+			case "load":
+				this.onLoad();
+				break;
+			case "unload":
+				this.onUnLoad();
+				break;
+		}
+	},
+
 	onLoad: function LinkpadPanel_onLoad() {
+		window.removeEventListener("load", this, false);
+		window.addEventListener("unload", this, false);
+
 		// Import JavaScript Compornent code module.
 		Components.utils.import("resource://linkpad/Utils.js");
 
@@ -75,7 +89,8 @@ var LinkpadPanel = {
 		this.listbox.focus();
 	},
 
-	onUnload: function LinkpadPanel_onUnload() {
+	onUnLoad: function LinkpadPanel_onUnload() {
+		window.removeEventListener("unload", this, false);
 
 		// unhook the command controller
 		this.listbox.controllers.removeController(this);
@@ -543,3 +558,4 @@ var LinkpadPanel = {
 		return anyVisible;
 	}
 };
+window.addEventListener("load", LinkpadPanel, false);

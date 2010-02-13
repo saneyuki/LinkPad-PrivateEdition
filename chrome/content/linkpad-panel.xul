@@ -8,9 +8,7 @@
 
 <page xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
       id="linkpad_panel"
-      windowtype="linkpad:panel"
-      onload="LinkpadPanel.onLoad();"
-      onunload="LinkpadPanel.onUnload();">
+      windowtype="linkpad:panel">
 
 	<script type="application/x-javascript" src="chrome://global/content/globalOverlay.js"></script>
 	<script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js"></script>
@@ -19,9 +17,6 @@
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-utils.js"></script>
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-panel.js"></script>
 
-	<stringbundleset id="mainStringbundleSet">
-		<stringbundle id="linkpad_bundle" src="chrome://linkpad/locale/linkpad.properties" />
-	</stringbundleset>
 
 	<commandset id="editMenuCommands" />
 	<commandset id="mainCommandSet">

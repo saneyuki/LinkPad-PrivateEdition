@@ -7,15 +7,8 @@
          id="linkpad_overlay"
          windowtype="linkpad:overlay">
 
-	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js"></script>
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-utils.js"></script>
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad.js"></script>
-	<script type="application/x-javascript">
-		<![CDATA[
-			window.addEventListener("load", function () { Linkpad.onLoad(); }, false);
-			window.addEventListener("unload", function() { Linkpad.onUnload(); }, false);
-		]]>
-	</script>
 
 	<keyset id="mainKeyset">
 		<key id="linkpad_key" key="&linkpad.overlay.commandkey;"

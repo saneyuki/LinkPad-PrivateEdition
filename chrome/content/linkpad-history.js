@@ -1,6 +1,16 @@
 var LinkpadHistory = {
 
+	handleEvent: function (aEvent) {
+		switch (aEvent.type) {
+			case "load":
+				this.onLoad();
+				break;
+		}
+	},
+
 	onLoad: function Linkpad_onLoad() {
+		window.removeEventListener("load", this, false);
+
 		// Insert "Save Link to Link Pad" before the cut item
 		document.getElementById("placesContext")
 		        .insertBefore(document.getElementById("linkpad_saveContext-history"),
@@ -22,3 +32,4 @@ var LinkpadHistory = {
 		}
 	}
 };
+window.addEventListener("load", LinkpadHistory, false);
