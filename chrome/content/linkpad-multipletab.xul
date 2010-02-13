@@ -21,7 +21,8 @@
 	<menupopup id="multipletab-selection-menu">
 		<menuitem id="linkpad_saveSelectedTabs-multipletab-selection"
 		          label="&linkpad.multipletab.tab.selected;"
-		          oncommand="LinkpadMultipleTab.saveSelectedTabs();"/>
+		          oncommand="LinkpadMultipleTab.saveSelectedTabs();"
+		          insertbefore="multipletab-selection-duplicate-separator"/>
 	</menupopup>
 
 </overlay>

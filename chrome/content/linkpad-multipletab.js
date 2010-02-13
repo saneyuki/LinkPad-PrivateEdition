@@ -11,15 +11,7 @@ var LinkpadMultipleTab = {
 	onLoad: function LinkpadMultipleTab_onLoad() {
 		window.removeEventListener("load", this, false);
 
-		this.ChangeInsertionPoint();
 		this.removeTabItem();
-	},
-
-	ChangeInsertionPoint: function LinkpadMultipleTab_ChangeInsertPoint() {
-		var item = document.getElementById("linkpad_saveSelectedTabs-multipletab-selection");
-		var multiple_selection = document.getElementById("multipletab-selection-menu");
-
-		multiple_selection.insertBefore(item, document.getElementById("multipletab-selection-duplicate-separator"));
 	},
 
 	removeTabItem: function LinkpadMultipleTab_removeTabItem() {
