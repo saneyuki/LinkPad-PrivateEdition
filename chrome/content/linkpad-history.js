@@ -1,5 +1,5 @@
 var LinkpadHistory = {
-
+/*
 	handleEvent: function (aEvent) {
 		switch (aEvent.type) {
 			case "load":
@@ -10,13 +10,8 @@ var LinkpadHistory = {
 
 	onLoad: function Linkpad_onLoad() {
 		window.removeEventListener("load", this, false);
-
-		// Insert "Save Link to Link Pad" before the cut item
-		document.getElementById("placesContext")
-		        .insertBefore(document.getElementById("linkpad_saveContext-history"),
-		document.getElementById("placesContext_cut"));
 	},
-
+*/
 	saveContext: function Linkpad_saveContext() {
 		// no need to check gHistoryTree.view.selection.count
 		// node will be null if there is a multiple selection
@@ -32,4 +27,4 @@ var LinkpadHistory = {
 		}
 	}
 };
-window.addEventListener("load", LinkpadHistory, false);
+//window.addEventListener("load", LinkpadHistory, false);

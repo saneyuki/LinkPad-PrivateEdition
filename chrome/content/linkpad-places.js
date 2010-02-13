@@ -21,11 +21,6 @@ var LinkpadPlaces = {
 
 		// Import JavaScript Compornent code module.
 		Components.utils.import("resource://linkpad/linkpad-module.js");
-		
-		// Insert "Save Link to Link Pad" before the cut item
-		var pContext = document.getElementById("placesContext");
-		var pContext_cut = document.getElementById("placesContext_cut");
-		pContext.insertBefore(document.getElementById("linkpad_saveContext-places"), pContext_cut);
 	},
 
 	saveItem: function Linkpad_saveItem(aURI, aTitle) {
