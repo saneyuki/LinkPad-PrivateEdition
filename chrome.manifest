@@ -8,9 +8,8 @@ resource linkpad  modules/
 
 ## overlays
 overlay  chrome://browser/content/browser.xul   chrome://linkpad/content/linkpad.xul
-overlay  chrome://browser/content/history/history-panel.xul   chrome://linkpad/content/linkpad-history.xul
 overlay  chrome://multipletab/content/multipletab.xul   chrome://linkpad/content/linkpad-multipletab.xul
-overlay  chrome://browser/content/places/places.xul   chrome://linkpad/content/linkpad-places.xul
+overlay  chrome://browser/content/places/placesOverlay.xul   chrome://linkpad/content/linkpad-places.xul
 
 ## styles
 style    chrome://global/content/customizeToolbar.xul   chrome://linkpad/skin/linkpad.css

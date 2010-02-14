@@ -33,7 +33,7 @@ var LinkpadPlaces = {
 		 * node will be null if there is a multiple selection
 		 * or if the selected item is not a URI node
 		 */
-		var node = document.getElementById("placeContent").selectedNode;
+		var node = PlacesUIUtils.getViewForNode(document.popupNode).selectedNode;
 
 		if (node && PlacesUtils.nodeIsURI(node) && !PlacesUIUtils.checkURLSecurity(node)) {
 			return;
