@@ -6,13 +6,20 @@ var LinkpadPanel = {
 	// nsIObserver
 	observe: function LinkpadPanel_observe(aSubject, aTopic, aData) {
 		if (aTopic == "netscape-linkpad") {
-			var self = this;
-			window.setTimeout(function() {
-				try {
-					self[aData](aSubject);
-				}
-				catch(e) {}
-			}, 0);
+			switch (aData) {
+				case "createItem":
+					this.createItem(aSubject);
+					break;
+				case "updateItem":
+					this.updateItem(aSubject);
+					break;
+				case "deleteItem":
+					this.deleteItem(aSubject);
+					break;
+				case "clearItems":
+					this.clearItems(aSubject);
+					break;
+			}
 		}
 		else if (aTopic == "nsPref:changed" && aData == "openClickCount") {
 			var count = this.branch.get("openClickCount");
@@ -258,14 +265,15 @@ var LinkpadPanel = {
 		if (!item) {
 			return;
 		}
+
 		var where = (!aOverride) ? this.determineWhere(): aOverride;
+		openUILinkIn(item.value, where);
+		window.content.focus();
+
 		if (this.branch.get("removeLinkOnOpen")) {
 			this.setSelection(item);
 			this.service.deleteItem(item.getAttribute("itemid"));
 		}
-
-		openUILinkIn(item.value, where);
-		window.content.focus();
 	},
 
 	copyLink: function LinkpadPanel_copyLink() {
