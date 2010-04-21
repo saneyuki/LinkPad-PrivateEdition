@@ -63,7 +63,8 @@ var Linkpad = {
 	},
 
 	insertToTabCtxBefore: function AddDToUnsortBkm_insertToTabCtxBefore(aElem, aReference) {
-		var tabContextMenu = document.getAnonymousElementByAttribute(gBrowser, "anonid", "tabContextMenu");
+		var tabContextMenu = gBrowser.tabContextMenu ||
+		                     document.getAnonymousElementByAttribute(gBrowser, "anonid", "tabContextMenu");
 		tabContextMenu.insertBefore(aElem, aReference);
 	},
 
