@@ -77,7 +77,7 @@ var LinkpadPanel = {
 		window.addEventListener("unload", this, false);
 
 		// Import JavaScript Compornent code module.
-		Components.utils.import("resource://linkpad/Utils.js");
+		Components.utils.import("resource://linkpad/UtilsForExtension.js");
 
 		// hookup the command controller
 		this.listbox.controllers.appendController(this);

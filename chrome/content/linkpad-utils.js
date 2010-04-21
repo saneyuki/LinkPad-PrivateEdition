@@ -2,7 +2,7 @@
  * Import JavaScript Compornent code module.
  ******************************************************************************/
 Components.utils.import("resource://linkpad/linkpad-module.js");
-Components.utils.import("resource://linkpad/Utils.js");
+Components.utils.import("resource://linkpad/UtilsForExtension.js");
 
 /*******************************************************************************
  * Helper function to convert a linkpad item to and from transferable data.

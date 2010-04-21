@@ -28,7 +28,7 @@ var LinkpadOptions = {
 		window.removeEventListener("load", this, false);
 
 		// Import JavaScript Compornent code module.
-		Components.utils.import("resource://linkpad/Utils.js");
+		Components.utils.import("resource://linkpad/UtilsForExtension.js");
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		this.getDBSize();
