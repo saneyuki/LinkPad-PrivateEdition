@@ -15,7 +15,8 @@ var LinkpadMultipleTab = {
 	},
 
 	removeTabItem: function LinkpadMultipleTab_removeTabItem() {
-		var tabContextMenu = document.getAnonymousElementByAttribute(gBrowser, "anonid", "tabContextMenu");
+		var tabContextMenu = gBrowser.tabContextMenu ||
+		                     document.getAnonymousElementByAttribute(gBrowser, "anonid", "tabContextMenu");
 		tabContextMenu.removeChild(document.getElementById("linkpad_saveThisTab"));
 	},
 
