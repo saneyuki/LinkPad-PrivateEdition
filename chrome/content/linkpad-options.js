@@ -11,7 +11,7 @@ var LinkpadOptions = {
 	_strings: null,
 	get strings() {
 		if (!this._strings) {
-			this._strings = (new StringBundle("chrome://linkpad/locale/linkpad.properties"));
+			this._strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
 		}
 		return this._strings;
 	},
@@ -28,7 +28,7 @@ var LinkpadOptions = {
 		window.removeEventListener("load", this, false);
 
 		// Import JavaScript Compornent code module.
-		Components.utils.import("resource://linkpad/UtilsForExtension.js");
+		Components.utils.import("resource://linkpad/UtilsForExtension.js", this);
 		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		this.getDBSize();

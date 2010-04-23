@@ -4,6 +4,11 @@
 var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService"];
 
 /*******************************************************************************
+ * Import JavaScript Compornent code module.
+ ******************************************************************************/
+Components.utils.import("resource://linkpad/UtilsForExtension.js");
+
+/*******************************************************************************
  * Observer topics
  ******************************************************************************/
 const TOPIC_DEFAULT = "netscape-linkpad";
@@ -261,8 +266,6 @@ LinkpadService.prototype = {
 	},
 
 	_load: function SERVICE_load() {
-		Components.utils.import("resource://linkpad/UtilsForExtension.js");
-
 		// get observer service and add observers
 		Observers.add(TOPIC_SHUTDOWN_APP, this);
 		Observers.add(TOPIC_SHUTDOWN_XPCOM, this);

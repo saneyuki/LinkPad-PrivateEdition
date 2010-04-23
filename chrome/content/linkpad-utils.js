@@ -1,8 +1,4 @@
-/*******************************************************************************
- * Import JavaScript Compornent code module.
- ******************************************************************************/
 Components.utils.import("resource://linkpad/linkpad-module.js");
-Components.utils.import("resource://linkpad/UtilsForExtension.js");
 
 /*******************************************************************************
  * Helper function to convert a linkpad item to and from transferable data.
@@ -280,7 +276,7 @@ LinkpadDnD.prototype = {
 	_strings: null,
 	get strings() {
 		if (!this._strings) {
-			this._strings = (new StringBundle("chrome://linkpad/locale/linkpad.properties"));
+			this._strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
 		}
 		return this._strings;
 	},
@@ -446,6 +442,7 @@ LinkpadDnD.prototype = {
 		return flavourSet;
 	}
 };
+Components.utils.import("resource://linkpad/UtilsForExtension.js", LinkpadDnD.prototype);
 /*******************************************************************************
  * Helper function to determine if the converted linkpad item is valid.
  ******************************************************************************/

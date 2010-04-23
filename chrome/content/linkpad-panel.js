@@ -42,7 +42,7 @@ var LinkpadPanel = {
 	_branch: null,
 	get branch() {
 		if (!this._branch) {
-			this._branch = (new Preferences(this.domain));
+			this._branch = (new this.Preferences(this.domain));
 		}
 		return this._branch;
 	},
@@ -77,7 +77,7 @@ var LinkpadPanel = {
 		window.addEventListener("unload", this, false);
 
 		// Import JavaScript Compornent code module.
-		Components.utils.import("resource://linkpad/UtilsForExtension.js");
+		Components.utils.import("resource://linkpad/UtilsForExtension.js", this);
 
 		// hookup the command controller
 		this.listbox.controllers.appendController(this);
@@ -88,7 +88,7 @@ var LinkpadPanel = {
 		this.listbox.setAttribute("clickcount", String(count));
 
 		// add ourself to the observer service
-		Observers.add("netscape-linkpad", this);
+		this.Observers.add("netscape-linkpad", this);
 
 		// load the listbox and focus it
 		this.loadListbox();
@@ -105,7 +105,7 @@ var LinkpadPanel = {
 
 		// remove the observer
 		this.branch.ignore("", this);
-		Observers.remove("netscape-linkpad", this);
+		this.Observers.remove("netscape-linkpad", this);
 
 		// remove variables
 		this.clipboard = null;
