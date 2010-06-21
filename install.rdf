@@ -13,7 +13,7 @@
 		<em:optionsURL>chrome://linkpad/content/linkpad-options.xul</em:optionsURL>
 		<em:iconURL>chrome://linkpad/skin/icon.png</em:iconURL>
 		<em:creator>Netscape</em:creator>
-		<em:developer>saneyuki</em:developer>
+		<em:developer>saneyuki_s</em:developer>
 		<em:contributor>kozakura</em:contributor>
 
 		<!-- Firefox -->
