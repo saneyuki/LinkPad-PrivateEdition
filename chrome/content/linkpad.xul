@@ -33,7 +33,7 @@
 		</menupopup>
 	</popupset>
 
-	<popup id="contentAreaContextMenu">
+	<menupopup id="contentAreaContextMenu">
 		<menuitem id="linkpad_saveContextLink"
 		          label="&linkpad.overlay.context;"
 		          insertbefore="context-savelink"
@@ -42,7 +42,7 @@
 		          label="&linkpad.overlay.page;"
 		          insertbefore="context-sep-viewbgimage"
 		          oncommand="Linkpad.saveThisPage();"/>
-	</popup>
+	</menupopup>
 
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="linkpad_menu"

@@ -8,7 +8,7 @@
 
 	<script type="application/x-javascript" src="chrome://linkpad/content/linkpad-places.js"></script>
 
-	<popup id="placesContext">
+	<menupopup id="placesContext">
 		<menuitem id="linkpad_saveContext-places"
 		          label="&linkpad.overlay.context;"
 		          insertafter="placesContext_cut"
@@ -16,5 +16,5 @@
 		          selectiontype="single"
 		          forcehideselection="bookmark"
 		          oncommand="LinkpadPlaces.saveContext();" />
-	</popup>
+	</menupopup>
 </overlay>
