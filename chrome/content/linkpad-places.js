@@ -1,11 +1,8 @@
 var LinkpadPlaces = {
 
-	_service: null,
 	get service() {
-		if (!this._service) {
-			this._service = LinkpadService;
-		}
-		return this._service;
+		delete this.service;
+		return this.service = LinkpadService;
 	},
 
 	handleEvent: function (aEvent) {

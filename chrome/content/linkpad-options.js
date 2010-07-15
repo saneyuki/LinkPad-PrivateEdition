@@ -1,19 +1,13 @@
 var LinkpadOptions = {
 
-	_service: null,
 	get service() {
-		if (!this._service) {
-			this._service = LinkpadService;
-		}
-		return this._service;
+		delete this.service;
+		return this.service = LinkpadService;
 	},
 
-	_strings: null,
 	get strings() {
-		if (!this._strings) {
-			this._strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
-		}
-		return this._strings;
+		delete this.strings;
+		return this.strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
 	},
 
 	handleEvent: function (aEvent) {

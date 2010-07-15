@@ -27,24 +27,16 @@ var LinkpadPanel = {
 		}
 	},
 
-	_service: null,
 	get service() {
-		if (!this._service) {
-			this._service = LinkpadService;
-		}
-		return this._service;
+		delete this.service;
+		return this.service = LinkpadService;
 	},
 
-	get domain() {
-		return "extensions.netscape.linkpad.";
-	},
+	domain: "extensions.netscape.linkpad.",
 
-	_branch: null,
 	get branch() {
-		if (!this._branch) {
-			this._branch = (new this.Preferences(this.domain));
-		}
-		return this._branch;
+		delete this.branch;
+		return this.branch = (new this.Preferences(this.domain));
 	},
 
 	get clipboard() {
@@ -58,7 +50,8 @@ var LinkpadPanel = {
 	},
 
 	get listbox() {
-		return document.getElementById("linkpad_listbox");
+		delete this.listbox;
+		return this.listbox = document.getElementById("linkpad_listbox");
 	},
 
 	handleEvent: function (aEvent) {
