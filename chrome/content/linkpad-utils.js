@@ -265,20 +265,14 @@ LinkpadDnD.prototype = {
 		this._prevTarget = aVal;
 	},
 
-	_statusText: null,
 	get statusText() {
-		if (!this._statusText) {
-			this._statusText = this.strings.get("linkpad.overlay.drop");
-		}
-		return this._statusText;
+		delete this.statusText;
+		return this.statusText = this.strings.get("linkpad.overlay.drop");
 	},
 
-	_strings: null,
 	get strings() {
-		if (!this._strings) {
-			this._strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
-		}
-		return this._strings;
+		delete this.strings;
+		return this.strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
 	},
 
 	getTypes: function LinkpadDnD_getTypes() {
