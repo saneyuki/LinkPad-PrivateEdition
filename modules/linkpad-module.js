@@ -122,19 +122,15 @@ LinkpadItem.prototype = {
  * 
  * @version   1.0
  ******************************************************************************/
-function LinkpadService() {
-	this._load();
-}
-LinkpadService.prototype = {
+var LinkpadService = {
 	_statements: null,
 	_conn: null,
 	_obs: null,
 	_items: null,
 
 	get strings() {
-		var strings = new StringBundle("chrome://linkpad/locale/linkpad.properties");
-		this.__defineGetter__("strings", function(){ return strings; });
-		return strings;
+		delete this.strings;
+		return this.strings = new StringBundle("chrome://linkpad/locale/linkpad.properties");
 	},
 
 	get prefBranch() {
@@ -279,6 +275,10 @@ LinkpadService.prototype = {
 		this._conn.executeSimpleSQL("VACUUM");
 	},
 
+	initialize: function () {
+		this._load();
+	},
+
 	_load: function SERVICE_load() {
 		// get observer service and add observers
 		Observers.add(TOPIC_SHUTDOWN_APP, this);
@@ -383,8 +383,7 @@ LinkpadService.prototype = {
 
 };
 // initialize
-var LinkpadService = new LinkpadService();
-
+LinkpadService.initialize();
 
 /*******************************************************************************
  * Helper function to determine if the converted linkpad item is valid.
