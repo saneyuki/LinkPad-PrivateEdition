@@ -32,14 +32,16 @@ LinkpadDnD.prototype = {
 		this._prevTarget = aVal;
 	},
 
-	get statusText() {
-		delete this.statusText;
-		return this.statusText = this.strings.get("linkpad.overlay.drop");
+	get strings() {
+		var strings = LinkpadService.strings;
+		this.__defineGetter__("strings", function(){ return strings; });
+		return strings;
 	},
 
-	get strings() {
-		delete this.strings;
-		return this.strings = this.service.strings;
+	get statusText() {
+		var statusText = this.strings.get("linkpad.overlay.drop");
+		this.__defineGetter__("statusText", function(){ return statusText; });
+		return statusText;
 	},
 
 	getTypes: function LinkpadDnD_getTypes() {
@@ -71,7 +73,7 @@ LinkpadDnD.prototype = {
 
 		// loop through the types and add to the xfer
 		var types = this.getTypes();
-		var converter = new this.LinkpadConverter(aItem);
+		var converter = new LinkpadConverter(aItem);
 		for (var i=0; i<types.length; i++) {
 			aXfer.data.addDataForFlavour(types[i], converter.get(types[i]));
 		}
@@ -188,7 +190,7 @@ LinkpadDnD.prototype = {
 	},
 
 	onDrop: function LinkpadDnD_onDrop(aEvent, aXfer, aSession) {
-		var converter = new this.LinkpadConverter(aXfer.data);
+		var converter = new LinkpadConverter(aXfer.data);
 		var item = converter.get(aXfer.flavour.contentType);
 		return item;
 	},

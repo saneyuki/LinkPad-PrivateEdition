@@ -2,7 +2,7 @@
  * Export Symbols.
  ******************************************************************************/
 var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService", "isValidLinkpadItem",
-                        "LinkpadClipboard"];
+                        "LinkpadConverter", "LinkpadClipboard"];
 
 /*******************************************************************************
  * Import JavaScript Compornent code module.
@@ -132,8 +132,9 @@ LinkpadService.prototype = {
 	_items: null,
 
 	get strings() {
-		delete this.strings;
-		return this.strings = new StringBundle("chrome://linkpad/locale/linkpad.properties");
+		var strings = new StringBundle("chrome://linkpad/locale/linkpad.properties");
+		this.__defineGetter__("strings", function(){ return strings; });
+		return strings;
 	},
 
 	get prefBranch() {
@@ -512,6 +513,9 @@ LinkpadConverter.prototype = {
 				break;
 
 			case "text/x-moz-text-internal":
+				var window = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+				             .getService(Components.interfaces.nsIWindowMediator)
+				             .getMostRecentWindow("navigator:browser");
 				var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				                 .getInterface(Components.interfaces.nsIWebNavigation)
 				                 .QueryInterface(Components.interfaces.nsIDocShellTreeItem)

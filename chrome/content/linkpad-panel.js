@@ -41,7 +41,7 @@ var LinkpadPanel = {
 
 	get clipboard() {
 		delete this.clipboard;
-		return this.clipboard = new this.LinkpadClipboard();
+		return this.clipboard = new LinkpadClipboard();
 	},
   
 	get dnd() {
@@ -71,6 +71,7 @@ var LinkpadPanel = {
 
 		// Import JavaScript Compornent code module.
 		Components.utils.import("resource://linkpad/UtilsForExtension.js", this);
+		Components.utils.import("resource://linkpad/linkpad-module.js");
 
 		// hookup the command controller
 		this.listbox.controllers.appendController(this);
@@ -280,7 +281,7 @@ var LinkpadPanel = {
 
 	pasteLink: function LinkpadPanel_pasteLink() {
 		var item = this.clipboard.onPaste();
-		if (!this.isValidLinkpadItem(item)) {
+		if (!isValidLinkpadItem(item)) {
 			return;
 		}
 		var sortIndex = this.getInsertionPoint(this.listbox.selectedItem);
@@ -473,7 +474,7 @@ var LinkpadPanel = {
 
 	onDrop: function lp_onDrop(aEvent, aXfer, aSession) {
 		var item = this.dnd.onDrop(aEvent, aXfer, aSession);
-		if (!this.isValidLinkpadItem(item)) {
+		if (!isValidLinkpadItem(item)) {
 			return;
 		}
 		// text/x-linkpad-item
