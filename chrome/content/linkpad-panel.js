@@ -32,8 +32,6 @@ var LinkpadPanel = {
 		return this.service = LinkpadService;
 	},
 
-	domain: "extensions.netscape.linkpad.",
-
 	get prefBranch() {
 		delete this.prefBranch;
 		return this.prefBranch = this.service.prefBranch;

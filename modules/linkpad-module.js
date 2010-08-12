@@ -381,15 +381,8 @@ var LinkpadService = {
 		}
 	},
 
-	/*******************************************************************************
-	 * Helper function to determine if the converted linkpad item is valid.
-	 ******************************************************************************/
+	// Helper function to determine if the converted linkpad item is valid.
 	isValidLinkpadItem: function SERVICE_isValidLinkpadItem(aItem) {
-		function isURL(aString) {
-			var regexp = /(ftp:\/\/|http:\/\/|https:\/\/|gopher:\/\/|file:\/\/|about:)(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-			return regexp.test(aString);
-		}
-
 		var properties = ["URL", "title", "ID", "sortIndex"];
 		for (var i=0; i<properties.length; i++) {
 			if (!aItem.hasOwnProperty(properties[i])) {
@@ -402,11 +395,12 @@ var LinkpadService = {
 		if (aItem.title === "") {
 			return false;
 		}
-		if (isURL(aItem.URL)) {
+		if (this.isValidLinkpadItemRegExp.test(aItem.URL)) {
 			return true;
 		}
 		return false;
 	},
+	isValidLinkpadItemRegExp: /(ftp:\/\/|http:\/\/|https:\/\/|gopher:\/\/|file:\/\/|about:)(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
 
 };
 // initialize
