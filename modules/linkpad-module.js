@@ -39,6 +39,8 @@ const SERVICE_DELETE_ITEM = "deleteItem";
 const SERVICE_CLEAR_ITEMS = "clearItems";
 const SERVICE_PRIVACY = "privacy.item.linkpad";
 
+const SERVICE_PREF_DOMAIN = "extensions.netscape.linkpad.";
+
 /*******************************************************************************
  * Helper function to create an item component from a mozIStorage row.
  *
@@ -131,6 +133,11 @@ LinkpadService.prototype = {
 	get strings() {
 		delete this.strings;
 		return this.strings = new StringBundle("chrome://linkpad/locale/linkpad.properties");
+	},
+
+	get prefBranch() {
+		delete this.branch;
+		return this.branch = new Preferences(SERVICE_PREF_DOMAIN);
 	},
 
 	// nsIObserver
