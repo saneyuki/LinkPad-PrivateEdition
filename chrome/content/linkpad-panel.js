@@ -46,7 +46,7 @@ var LinkpadPanel = {
   
 	get dnd() {
 		delete this.dnd;
-		return this.dnd = (new LinkpadDnD(this.listbox));
+		return this.dnd = new LinkpadDnD(this.listbox, window);
 	},
 
 	get listbox() {
