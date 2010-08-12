@@ -205,4 +205,3 @@ LinkpadDnD.prototype = {
 		return flavourSet;
 	}
 };
-Components.utils.import("resource://linkpad/UtilsForExtension.js", LinkpadDnD.prototype);
