@@ -272,7 +272,7 @@ LinkpadDnD.prototype = {
 
 	get strings() {
 		delete this.strings;
-		return this.strings = (new this.StringBundle("chrome://linkpad/locale/linkpad.properties"));
+		return this.strings = this.service.strings;
 	},
 
 	getTypes: function LinkpadDnD_getTypes() {

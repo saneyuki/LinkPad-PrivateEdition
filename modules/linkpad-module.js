@@ -128,6 +128,11 @@ LinkpadService.prototype = {
 	_obs: null,
 	_items: null,
 
+	get strings() {
+		delete this.strings;
+		return this.strings = new StringBundle("chrome://linkpad/locale/linkpad.properties");
+	},
+
 	// nsIObserver
 	observe: function SERVICE_observe(aSubject, aTopic, aData) {
 		switch (aTopic) {
