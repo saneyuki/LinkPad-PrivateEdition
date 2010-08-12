@@ -1,7 +1,8 @@
 /*******************************************************************************
  * Export Symbols.
  ******************************************************************************/
-var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService"];
+var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService", "isValidLinkpadItem",
+                        "LinkpadClipboard"];
 
 /*******************************************************************************
  * Import JavaScript Compornent code module.
@@ -382,3 +383,266 @@ LinkpadService.prototype = {
 };
 // initialize
 var LinkpadService = new LinkpadService();
+
+
+/*******************************************************************************
+ * Helper function to determine if the converted linkpad item is valid.
+ ******************************************************************************/
+function isValidLinkpadItem(aItem) {
+	function isURL(aString) {
+		var regexp = /(ftp:\/\/|http:\/\/|https:\/\/|gopher:\/\/|file:\/\/|about:)(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+		return regexp.test(aString);
+	}
+
+	var properties = ["URL", "title", "ID", "sortIndex"];
+	for (var i=0; i<properties.length; i++) {
+		if (!aItem.hasOwnProperty(properties[i])) {
+			return false;
+		}
+	}
+	if (aItem.URL === "") {
+		return false;
+	}
+	if (aItem.title === "") {
+		return false;
+	}
+	if (isURL(aItem.URL)) {
+		return true;
+	}
+	return false;
+}
+
+/*******************************************************************************
+ * Helper function to convert a linkpad item to and from transferable data.
+ * If this is a copy or a drag operation the item will be a linkpad item.
+ * If this is a paste or drop operation the item will be the transferable data.
+ ******************************************************************************/
+function LinkpadConverter(aItem) {
+	this._item = aItem;
+}
+LinkpadConverter.prototype = {
+	_item: null,
+
+	get: function LinkpadConverter_get(aContentType) {
+		if (this._item instanceof LinkpadItem) {
+			return this._toData(aContentType);
+		}
+		return this._fromData(aContentType);
+	},
+
+	toString: function LinkpadConverter_toString(aVal) {
+		var rv = Components.classes["@mozilla.org/supports-string;1"]
+		         .createInstance(Components.interfaces.nsISupportsString);
+		rv.data = aVal;
+		return rv;
+	},
+
+	_toData: function LinkpadConverter__toData(aContentType) {
+		var rv = "";
+		switch (aContentType) {
+
+			case "text/x-linkpad-item":
+				rv = this._item.URL + "\n" + this._item.title + 
+			         "\n" + this._item.ID + "\n" + String(this._item.sortIndex);
+				break;
+
+			case "text/x-moz-text-internal":
+			case "text/x-moz-url":
+				rv = this._item.URL + "\n" + this._item.title;
+				break;
+
+			case "text/html":
+				rv = "<A HREF=\"" + this._item.URL + "\">" + this._item.title + "</A>";
+				break;
+
+			case "text/unicode":
+				rv = this._item.URL;
+				break;
+
+			case "moz/bookmarkclipboarditem":
+				rv = this._item.title + "\n" + this._item.URL + "\n";
+				rv += "\n\n\n\n\n\n\n";
+
+				var tmpItems = [this._item.title, this._item.URL];
+				var separator = "]-[";
+				var extrarSeparator = "@";
+				for (var i=0; i<tmpItems.length; i++) {
+					while (tmpItems[i].indexOf(separator)>-1) {
+						separator += extrarSeparator;
+					}
+				}
+				rv = separator + "\n" + rv;
+				break;
+
+			default:
+				rv.URL = "";
+				rv.title = "";
+				rv.ID = null;
+				rv.sortIndex = 0;
+				break;
+		}
+
+		return rv;
+	},
+
+	_fromData: function LinkpadConverter__fromData(aContentType) {
+		var data = this._item;
+		data = data.split("\n");
+
+		var rv = {};
+		switch (aContentType) {
+
+			case "text/x-linkpad-item":
+				rv.URL = data[0];
+				rv.title = data[1];
+				rv.ID = data[2];
+				rv.sortIndex = Number(data[3]);
+				break;
+
+			case "text/x-moz-url":
+				rv.URL = data[0];
+				if (!data[1]) {
+					rv.title = unescape(data[0]);
+				}
+				else {
+					rv.title = data[1];
+					rv.ID = null;
+					rv.sortIndex = 0;
+				}
+				break;
+
+			case "text/x-moz-text-internal":
+				var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				                 .getInterface(Components.interfaces.nsIWebNavigation)
+				                 .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				                 .rootTreeItem.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				                 .getInterface(Components.interfaces.nsIDOMWindow);
+				var label = mainWindow.gBrowser.selectedTab.linkedBrowser.contentTitle;
+
+				rv.URL = data[0];
+				if (!label) {
+					rv.title = unescape(data[0]);
+				}
+				else {
+					rv.title = label;
+				}
+				rv.ID = null;
+				rv.sortIndex = 0;
+				break;
+
+			case "text/unicode":
+				rv.URL = data[0];
+				rv.title = unescape(data[0]);
+				rv.ID = null;
+				rv.sortIndex = 0;
+				break;
+
+			case "moz/bookmarkclipboarditem":
+				var sep = data.shift();
+				var tmpItems = data.join("\n");
+				tmpItems = tmpItems.split(sep);
+				tmpItems.pop(); 
+				for (var i=0; i<tmpItems.length; i++) {
+					var childs = tmpItems[i].split("\n");
+					childs.pop();
+					rv.URL = childs[3];
+					rv.title = childs[2];
+					rv.ID = null;
+					rv.sortIndex = 0;
+					break;
+				}
+				break;
+
+			case "text/html":
+			default:
+				rv.URL = "";
+				rv.title = "";
+				rv.ID = null;
+				rv.sortIndex = 0;
+				break;
+		}
+
+		return rv;
+	}
+};
+
+/*******************************************************************************
+* Helper function to deal with clipboard operations.
+******************************************************************************/
+function LinkpadClipboard() {
+	this._board = Components.classes["@mozilla.org/widget/clipboard;1"]
+	              .getService(Components.interfaces.nsIClipboard);
+}
+LinkpadClipboard.prototype = {
+	_board: null,
+
+	getTypes: function LinkpadClipboard_getTypes(aAction) {
+		var types = ["text/x-linkpad-item", "moz/bookmarkclipboarditem", 
+		            "text/x-moz-url", "text/x-moz-text-internal", "text/unicode"];
+		if (aAction == "copy") {
+			types.push("text/html");
+		}
+		return types;
+	},
+
+	hasData: function LinkpadClipboard_hasData() {
+		var types = ["text/x-linkpad-item", "moz/bookmarkclipboarditem", 
+		             "text/x-moz-url", "text/x-moz-text-internal", "text/unicode"];
+
+		// see if clipboard has any types
+		return this._board.hasDataMatchingFlavors(types, types.length,
+		                                          Components.interfaces.nsIClipboard.kGlobalClipboard);
+	},
+
+	onCopy: function LinkpadClipboard_onCopy(aItem) {
+
+		// create a transferable
+		var converter = new LinkpadConverter(aItem);
+		var xferable = Components.classes["@mozilla.org/widget/transferable;1"]
+		                         .createInstance(Components.interfaces.nsITransferable);
+
+		// loop through the types and add to the transferable
+		var types = this.getTypes("copy");
+		var data;
+		for (var i=0; i<types.length; i++) {
+			data = converter.get(types[i]);
+			xferable.addDataFlavor(types[i]);
+			xferable.setTransferData(types[i], converter.toString(data), data.length*2);
+		}
+
+		// set the transferable on the clipboard
+		this._board.setData(xferable, null,
+		                    Components.interfaces.nsIClipboard.kGlobalClipboard);
+	},
+
+	onPaste: function LinkpadClipboard_onPaste() {
+
+		// create a transferable
+		var types = this.getTypes("paste");
+		var xferable = Components.classes["@mozilla.org/widget/transferable;1"]
+		                         .createInstance(Components.interfaces.nsITransferable);
+
+		// loop through the types and add to the transferable
+		for (var i=0; i<types.length; i++) {
+			xferable.addDataFlavor(types[i]);
+		}
+		// get the transferable off the clipboard
+		this._board.getData(xferable, Components.interfaces.nsIClipboard.kGlobalClipboard);
+
+		// get the data out of the transferable
+		var data = {};
+		var type = {};
+		try {
+			xferable.getAnyTransferData(type, data, {});
+			type = type.value;
+			data = data.value.QueryInterface(Components.interfaces.nsISupportsString).data;
+
+			// convert the data and return it
+			var converter = new LinkpadConverter(data);
+			return converter.get(type);
+		}
+		catch(e) {
+			return {};
+		}
+	}
+};

@@ -41,7 +41,7 @@ var LinkpadPanel = {
 
 	get clipboard() {
 		delete this.clipboard;
-		return this.clipboard = (new LinkpadClipboard());
+		return this.clipboard = new this.LinkpadClipboard();
 	},
   
 	get dnd() {
@@ -280,7 +280,7 @@ var LinkpadPanel = {
 
 	pasteLink: function LinkpadPanel_pasteLink() {
 		var item = this.clipboard.onPaste();
-		if (!isValidLinkpadItem(item)) {
+		if (!this.isValidLinkpadItem(item)) {
 			return;
 		}
 		var sortIndex = this.getInsertionPoint(this.listbox.selectedItem);
@@ -473,7 +473,7 @@ var LinkpadPanel = {
 
 	onDrop: function lp_onDrop(aEvent, aXfer, aSession) {
 		var item = this.dnd.onDrop(aEvent, aXfer, aSession);
-		if (!isValidLinkpadItem(item)) {
+		if (!this.isValidLinkpadItem(item)) {
 			return;
 		}
 		// text/x-linkpad-item
