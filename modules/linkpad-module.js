@@ -1,8 +1,8 @@
 /*******************************************************************************
  * Export Symbols.
  ******************************************************************************/
-var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService", "isValidLinkpadItem",
-                        "LinkpadConverter", "LinkpadClipboard"];
+var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService", "LinkpadConverter",
+                        "LinkpadClipboard"];
 
 /*******************************************************************************
  * Import JavaScript Compornent code module.
@@ -381,36 +381,37 @@ var LinkpadService = {
 		}
 	},
 
+	/*******************************************************************************
+	 * Helper function to determine if the converted linkpad item is valid.
+	 ******************************************************************************/
+	isValidLinkpadItem: function SERVICE_isValidLinkpadItem(aItem) {
+		function isURL(aString) {
+			var regexp = /(ftp:\/\/|http:\/\/|https:\/\/|gopher:\/\/|file:\/\/|about:)(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+			return regexp.test(aString);
+		}
+
+		var properties = ["URL", "title", "ID", "sortIndex"];
+		for (var i=0; i<properties.length; i++) {
+			if (!aItem.hasOwnProperty(properties[i])) {
+				return false;
+			}
+		}
+		if (aItem.URL === "") {
+			return false;
+		}
+		if (aItem.title === "") {
+			return false;
+		}
+		if (isURL(aItem.URL)) {
+			return true;
+		}
+		return false;
+	},
+
 };
 // initialize
 LinkpadService.initialize();
 
-/*******************************************************************************
- * Helper function to determine if the converted linkpad item is valid.
- ******************************************************************************/
-function isValidLinkpadItem(aItem) {
-	function isURL(aString) {
-		var regexp = /(ftp:\/\/|http:\/\/|https:\/\/|gopher:\/\/|file:\/\/|about:)(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-		return regexp.test(aString);
-	}
-
-	var properties = ["URL", "title", "ID", "sortIndex"];
-	for (var i=0; i<properties.length; i++) {
-		if (!aItem.hasOwnProperty(properties[i])) {
-			return false;
-		}
-	}
-	if (aItem.URL === "") {
-		return false;
-	}
-	if (aItem.title === "") {
-		return false;
-	}
-	if (isURL(aItem.URL)) {
-		return true;
-	}
-	return false;
-}
 
 /*******************************************************************************
  * Helper function to convert a linkpad item to and from transferable data.
