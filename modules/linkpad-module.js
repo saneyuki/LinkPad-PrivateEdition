@@ -568,11 +568,15 @@ LinkpadConverter.prototype = {
 * Helper function to deal with clipboard operations.
 ******************************************************************************/
 function LinkpadClipboard() {
-	this._board = Components.classes["@mozilla.org/widget/clipboard;1"]
-	              .getService(Components.interfaces.nsIClipboard);
 }
 LinkpadClipboard.prototype = {
-	_board: null,
+
+	get _board () {
+		var clipboard = Components.classes["@mozilla.org/widget/clipboard;1"]
+		                .getService(Components.interfaces.nsIClipboard);
+		this.__defineGetter__("_board", function(){ return clipboard; });
+		return clipboard;
+	},
 
 	getTypes: function LinkpadClipboard_getTypes(aAction) {
 		var types = ["text/x-linkpad-item", "moz/bookmarkclipboarditem", 
