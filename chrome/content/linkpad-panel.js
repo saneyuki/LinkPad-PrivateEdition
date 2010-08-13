@@ -94,6 +94,7 @@ var LinkpadPanel = {
 		// unhook the command controller
 		this.listbox.controllers.removeController(this);
 		this.dnd.parentNode = null;
+		this.dnd.window = null;
 
 		// remove the observer
 		this.prefBranch.ignore("", this);
