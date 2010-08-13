@@ -2,7 +2,7 @@
  * Export Symbols.
  ******************************************************************************/
 var EXPORTED_SYMBOLS = ["LinkpadItem", "LinkpadService", "LinkpadConverter",
-                        "LinkpadClipboard"];
+                        "LinkpadClipboard", "LinkpadDnD"];
 
 /*******************************************************************************
  * Import JavaScript Compornent code module.
