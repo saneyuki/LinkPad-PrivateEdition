@@ -52,6 +52,16 @@ var LinkpadPanel = {
 		return this.listbox = document.getElementById("linkpad_listbox");
 	},
 
+	get tooltipTitle() {
+		delete this.tooltipTitle;
+		return this.tooltipTitle = document.getElementById("LinkPadPanel_tTitleText");
+	},
+
+	get tooltipUrl() {
+		delete this.tooltipUrl;
+		return this.tooltipUrl = document.getElementById("LinkPadPanel_tUrlText");
+	},
+
 	handleEvent: function (aEvent) {
 		switch (aEvent.type) {
 			case "load":
@@ -164,14 +174,14 @@ var LinkpadPanel = {
 		var target = aEvent.target;
 		var Title = target.getAttribute("label");
 		var URI = target.getAttribute("value");
+		var tooltipTitle = this.tooltipTitle;
+		var tooltipUrl = this.tooltipUrl;
 
-		var tooltipTitle = document.getElementById("LinkPadPanel_tTitleText");
 		tooltipTitle.hidden = (Title == URI);
 		if (!tooltipTitle.hidden) {
 			tooltipTitle.textContent = Title;
 		}
 
-		var tooltipUrl = document.getElementById("LinkPadPanel_tUrlText");
 		tooltipUrl.value = URI;
 
 		target.setAttribute("tooltip", "LinkPadPanel_Tooltip");
